@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
 public class GameSetUpController {
 
     private final String siteName;
@@ -18,13 +17,13 @@ public class GameSetUpController {
         this.siteName = siteName;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public String test(Model model) {
         model.addAttribute("siteName", this.siteName);
         return "index";
     }
 
-    @GetMapping("/game/new")
+    @GetMapping("game/new")
     public String newGame(Model model){
         Game game = gameSetUpService.initNewGame();
         model.addAttribute("game", game);
