@@ -1,7 +1,10 @@
 com\aws\corona\charades\domain\Team.class
 com\aws\corona\charades\HelloWorldAppInitializer.class
 com\aws\corona\charades\configuration\ApplicationConfig.class
+com\aws\corona\charades\controller\GameHandler.class
+com\aws\corona\charades\domain\Game.class
 com\aws\corona\charades\configuration\MvcConfig.class
 com\aws\corona\charades\domain\Player.class
+com\aws\corona\charades\domain\GameBuilder.class
+com\aws\corona\charades\domain\GameCacheSingleton.class
 com\aws\corona\charades\controller\GameController.class
-com\aws\corona\charades\domain\GameContext.class
