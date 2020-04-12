@@ -1,7 +1,11 @@
 package com.aws.corona.charades.domain;
 
-import java.util.List;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Objects;
+
+@Component
 public class Team {
     private String name;
     private List<Player> players;
@@ -35,5 +39,20 @@ public class Team {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Team team = (Team) o;
+        return Objects.equals(name, team.name) &&
+                Objects.equals(players, team.players) &&
+                Objects.equals(score, team.score);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, players, score);
     }
 }

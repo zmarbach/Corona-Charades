@@ -1,5 +1,7 @@
 package com.aws.corona.charades.configuration;
 
+import com.aws.corona.charades.handler.GameSetUpHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -7,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
-import com.aws.corona.charades.controller.GameController;
+import com.aws.corona.charades.controller.GameSetUpController;
 
 @Configuration
 @ComponentScan({ "com.aws.corona.charades.configuration" })
@@ -16,10 +18,12 @@ public class ApplicationConfig {
 
     @Value("${HelloWorld.SiteName}")
     private String siteName;
+    @Autowired
+    private GameSetUpHandler gameSetUpHandler;
 
     @Bean
-    public GameController helloWorld() {
-        return new GameController(this.siteName);
+    public GameSetUpController helloWorld() {
+        return new GameSetUpController(this.siteName, gameSetUpHandler);
     }
 
     /**
