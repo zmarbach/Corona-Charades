@@ -6,18 +6,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
 public class GameSetUpController {
 
     private final String siteName;
-    private final GameSetUpService gameSetUpService;
+    private GameSetUpService gameSetUpService = new GameSetUpService();
 
-    public GameSetUpController(final String siteName, GameSetUpService gameSetUpService) {
+    public GameSetUpController(final String siteName) {
         this.siteName = siteName;
-        this.gameSetUpService = gameSetUpService;
     }
 
     @GetMapping
