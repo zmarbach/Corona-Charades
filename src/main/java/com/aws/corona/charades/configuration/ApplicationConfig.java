@@ -1,6 +1,6 @@
 package com.aws.corona.charades.configuration;
 
-import com.aws.corona.charades.handler.GameSetUpHandler;
+import com.aws.corona.charades.service.GameSetUpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -19,11 +19,11 @@ public class ApplicationConfig {
     @Value("${HelloWorld.SiteName}")
     private String siteName;
     @Autowired
-    private GameSetUpHandler gameSetUpHandler;
+    private GameSetUpService gameSetUpService;
 
     @Bean
     public GameSetUpController helloWorld() {
-        return new GameSetUpController(this.siteName, gameSetUpHandler);
+        return new GameSetUpController(this.siteName, gameSetUpService);
     }
 
     /**

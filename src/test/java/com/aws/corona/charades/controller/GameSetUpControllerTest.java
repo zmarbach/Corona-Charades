@@ -1,6 +1,6 @@
 package com.aws.corona.charades.controller;
 
-import com.aws.corona.charades.handler.GameSetUpHandler;
+import com.aws.corona.charades.service.GameSetUpService;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -16,9 +16,9 @@ public class GameSetUpControllerTest {
     private static final String EXPECTED_SITE_NAME = "home";
     private static final String EXPECTED_VIEW_NAME = "index";
     @Autowired
-    private GameSetUpHandler gameSetUpHandler;
+    private GameSetUpService gameSetUpService;
 
-    private GameSetUpController gameSetUpController = new GameSetUpController(EXPECTED_SITE_NAME, gameSetUpHandler);
+    private GameSetUpController gameSetUpController = new GameSetUpController(EXPECTED_SITE_NAME, gameSetUpService);
 
     @BeforeAll
     static void setup() {
