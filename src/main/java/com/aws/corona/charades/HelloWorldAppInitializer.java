@@ -1,8 +1,8 @@
-package com.aws.codestar.projecttemplates;
+package com.aws.corona.charades;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import com.aws.codestar.projecttemplates.configuration.MvcConfig;
+import com.aws.corona.charades.configuration.MvcConfig;
 
 /**
  * Utility to initialize the Spring MVC HelloWorld application.

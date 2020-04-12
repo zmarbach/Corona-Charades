@@ -1,6 +1,7 @@
-package com.aws.codestar.projecttemplates.controller;
+package com.aws.corona.charades.controller;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Basic Spring MVC controller that handles all GET requests.
  */
 @Controller
-@RequestMapping(path = "${base.url}")
+@RequestMapping("/")
 public class HelloWorldController {
 
     private final String siteName;
@@ -20,7 +21,7 @@ public class HelloWorldController {
         this.siteName = siteName;
     }
 
-//    @GetMapping("/")
+//    @GetMapping()
 //    public ModelAndView helloWorld() {
 //        ModelAndView mav = new ModelAndView("index");
 //        mav.addObject("siteName", this.siteName);
