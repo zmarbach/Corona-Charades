@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Basic Spring MVC controller that handles all GET requests.
  */
 @Controller
+@RequestMapping(path = "${base.url}")
 public class HelloWorldController {
 
     private final String siteName;
@@ -26,7 +27,7 @@ public class HelloWorldController {
 //        return mav;
 //    }
 
-    @GetMapping(path = "${base.url}")
+    @GetMapping
     public ModelAndView test() {
         ModelAndView mav = new ModelAndView("index-test");
         mav.addObject("siteName", this.siteName);
