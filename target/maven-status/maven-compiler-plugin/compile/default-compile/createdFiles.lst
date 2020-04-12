@@ -1,4 +1,7 @@
-com\aws\codestar\projecttemplates\configuration\MvcConfig.class
-com\aws\codestar\projecttemplates\controller\HelloWorldController.class
-com\aws\codestar\projecttemplates\HelloWorldAppInitializer.class
-com\aws\codestar\projecttemplates\configuration\ApplicationConfig.class
+com\aws\corona\charades\domain\Team.class
+com\aws\corona\charades\HelloWorldAppInitializer.class
+com\aws\corona\charades\configuration\ApplicationConfig.class
+com\aws\corona\charades\configuration\MvcConfig.class
+com\aws\corona\charades\domain\Player.class
+com\aws\corona\charades\controller\GameController.class
+com\aws\corona\charades\domain\GameContext.class

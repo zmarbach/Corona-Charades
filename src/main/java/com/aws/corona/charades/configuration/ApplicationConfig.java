@@ -7,25 +7,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
-import com.aws.corona.charades.controller.HelloWorldController;
+import com.aws.corona.charades.controller.GameController;
 
-/**
- * Spring configuration for sample application.
- */
 @Configuration
 @ComponentScan({ "com.aws.corona.charades.configuration" })
 @PropertySource("classpath:application.properties")
 public class ApplicationConfig {
 
-    /**
-     * Retrieved from properties file.
-     */
     @Value("${HelloWorld.SiteName}")
     private String siteName;
 
     @Bean
-    public HelloWorldController helloWorld() {
-        return new HelloWorldController(this.siteName);
+    public GameController helloWorld() {
+        return new GameController(this.siteName);
     }
 
     /**
