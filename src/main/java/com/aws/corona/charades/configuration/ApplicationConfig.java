@@ -1,4 +1,4 @@
-package com.aws.codestar.projecttemplates.configuration;
+package com.aws.corona.charades.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -7,13 +7,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
-import com.aws.codestar.projecttemplates.controller.HelloWorldController;
+import com.aws.corona.charades.controller.HelloWorldController;
 
 /**
  * Spring configuration for sample application.
  */
 @Configuration
-@ComponentScan({ "com.aws.codestar.projecttemplates.configuration" })
+@ComponentScan({ "com.aws.corona.charades.configuration" })
 @PropertySource("classpath:application.properties")
 public class ApplicationConfig {
 
