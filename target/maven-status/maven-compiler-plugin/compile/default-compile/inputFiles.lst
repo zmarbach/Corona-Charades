@@ -1,4 +1,7 @@
-C:\source\Corona-Charades\src\main\java\com\aws\codestar\projecttemplates\HelloWorldAppInitializer.java
-C:\source\Corona-Charades\src\main\java\com\aws\codestar\projecttemplates\configuration\ApplicationConfig.java
-C:\source\Corona-Charades\src\main\java\com\aws\codestar\projecttemplates\controller\HelloWorldController.java
-C:\source\Corona-Charades\src\main\java\com\aws\codestar\projecttemplates\configuration\MvcConfig.java
+C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\HelloWorldAppInitializer.java
+C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\controller\GameController.java
+C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\domain\Team.java
+C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\domain\GameContext.java
+C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\configuration\MvcConfig.java
+C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\domain\Player.java
+C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\configuration\ApplicationConfig.java
