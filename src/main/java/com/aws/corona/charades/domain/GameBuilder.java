@@ -9,7 +9,7 @@ import java.util.UUID;
 @Component
 public class GameBuilder {
 
-    private static final UUID DEFAULT_UUID = UUID.fromString("1");
+    private static final UUID DEFAULT_UUID = UUID.randomUUID();
     private static final Team DEFAULT_TEAM_ONE = new Team("Team One", Collections.<Player>emptyList(), 0);
     private static final Team DEFAULT_TEAM_TWO = new Team("Team Two", Collections.<Player>emptyList(), 0);
     private static final List<String> DEFAULT_WORDS = Collections.emptyList();
