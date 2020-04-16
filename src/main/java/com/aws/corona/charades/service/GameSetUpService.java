@@ -1,23 +1,20 @@
 package com.aws.corona.charades.service;
 
-import com.aws.corona.charades.domain.Game;
-import com.aws.corona.charades.domain.GameBuilder;
-import com.aws.corona.charades.domain.GameCacheSingleton;
+import com.aws.corona.charades.domain.GameSingleton;
+import com.aws.corona.charades.domain.Player;
+import com.aws.corona.charades.domain.Team;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class GameSetUpService {
 
-    private GameBuilder gameBuilder = new GameBuilder();
-    private static final List<Game> allGames = GameCacheSingleton.getInstance().getAllGames();
+    public GameSingleton initNewGame() {
+        return GameSingleton.getInstance();
+    }
 
-    public Game initNewGame() {
-        UUID uuid = UUID.randomUUID();
-        Game game = gameBuilder.withUUID(uuid).build();
-        allGames.add(game);
-        return game;
+    public void addPlayersToTeam(Integer numPlayersOnTeam, Team team) {
+        for(int i=0; i<numPlayersOnTeam; i++) {
+            team.getPlayers().add(new Player("Player " + i+1));
+        }
     }
 }

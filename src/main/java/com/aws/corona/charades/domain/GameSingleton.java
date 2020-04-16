@@ -2,30 +2,31 @@ package com.aws.corona.charades.domain;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 @Component
-public class Game {
-    private UUID uuid;
+public class GameSingleton {
+    private static GameSingleton INSTANCE;
     private Team teamOne;
     private Team teamTwo;
     private List<String> words;
 
-    public Game(UUID uuid, Team teamOne, Team teamTwo, List<String> words) {
-        this.uuid = uuid;
+    private GameSingleton(Team teamOne, Team teamTwo, List<String> words) {
         this.teamOne = teamOne;
         this.teamTwo = teamTwo;
         this.words = words;
     }
 
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public static synchronized GameSingleton getInstance(){
+        if(INSTANCE == null){
+            INSTANCE = new GameSingleton(
+                    new Team("Team One", Collections.<Player>emptyList(), 0),
+                    new Team("Team Two", Collections.<Player>emptyList(), 0),
+                    Collections.<String>emptyList());
+        }
+        return INSTANCE;
     }
 
     public Team getTeamOne() {
@@ -56,15 +57,14 @@ public class Game {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Game game = (Game) o;
-        return Objects.equals(uuid, game.uuid) &&
-                Objects.equals(teamOne, game.teamOne) &&
-                Objects.equals(teamTwo, game.teamTwo) &&
-                Objects.equals(words, game.words);
+        GameSingleton gameSingleton = (GameSingleton) o;
+        return Objects.equals(teamOne, gameSingleton.teamOne) &&
+                Objects.equals(teamTwo, gameSingleton.teamTwo) &&
+                Objects.equals(words, gameSingleton.words);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uuid, teamOne, teamTwo, words);
+        return Objects.hash(teamOne, teamTwo, words);
     }
 }
