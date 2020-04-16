@@ -1,5 +1,8 @@
 package com.aws.corona.charades.domain;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class TeamPlayerNumbers {
 
     private Integer numPlayersTeamOne = 0;
