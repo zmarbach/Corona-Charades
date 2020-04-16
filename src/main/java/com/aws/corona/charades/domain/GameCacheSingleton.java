@@ -2,18 +2,16 @@ package com.aws.corona.charades.domain;
 
 import org.springframework.stereotype.Component;
 
-import java.rmi.NoSuchObjectException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Component
 public class GameCacheSingleton {
     private static GameCacheSingleton INSTANCE;
-    private List<Game> allGames;
+    private List<GameSingleton> allGameSingletons;
 
     private GameCacheSingleton() {
-        this.allGames = new ArrayList<Game>();
+        this.allGameSingletons = new ArrayList<GameSingleton>();
     }
 
     public static synchronized GameCacheSingleton getInstance(){
@@ -23,16 +21,8 @@ public class GameCacheSingleton {
         return INSTANCE;
     }
 
-    public List<Game> getAllGames() {
-        return allGames;
+    public List<GameSingleton> getAllGameSingletons() {
+        return allGameSingletons;
     }
 
-    public Game getGameByUUID(UUID uuid) throws NoSuchObjectException {
-        for (Game game : allGames) {
-            if (uuid.equals(game.getUuid())) {
-                return game;
-            }
-        }
-        throw new NoSuchObjectException("No game was found matching UUID: " + uuid.toString());
-    }
 }
