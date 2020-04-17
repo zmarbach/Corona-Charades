@@ -44,6 +44,7 @@ public class GameSetUpController {
         playerForm.setPlayers(GameSingleton.getInstance().getTeamOne().getPlayers());
         model.addAttribute("playerForm", playerForm);
         model.addAttribute("numOfPlayersInPlayerForm", playerForm.getPlayers().size());
+        model.addAttribute("activeWords", GameSingleton.getInstance().getActiveWords());
         model.addAttribute("teamOnePlayers", GameSingleton.getInstance().getTeamOne().getPlayers());
         model.addAttribute("teamTwoPlayers", GameSingleton.getInstance().getTeamTwo().getPlayers());
         return "player-names-team-one";
