@@ -8,12 +8,19 @@
           <form:form action="/player-names-team-one" method="POST" modelAttribute="playerForm">
 
               <c:forEach items="${playerForm.players}" var="player" varStatus="status">
-                  <input name="players[${status.index}].name" value="${player.name}" />
+                  <form:input path="players[${status.index}].name" value="${player.name}" type="text"/>
               </c:forEach>
 
-              <input type="submit" value="Save Player Names!" />
+              <input type="submit" value="Save Player Names" />
 
           </form:form>
+      </div>
+
+      <div>
+        <c:forEach items="${game.words}" var="word">
+            <h6>${word}</h6>
+            <br />
+        </c:forEach>
       </div>
   </body>
 </html>
