@@ -38,6 +38,10 @@ public class GameSingleton {
         return words;
     }
 
+    public void setWords(List<String> words) {
+        this.words = words;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,4 +56,5 @@ public class GameSingleton {
     public int hashCode() {
         return Objects.hash(teamOne, teamTwo, words);
     }
+
 }

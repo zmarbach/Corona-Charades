@@ -22,18 +22,28 @@ public class GameSetUpService {
     private Random r = new Random();
 
     public void addPlayersToTeam(Integer numPlayersOnTeam, Team team) {
+        //if for some reason the team is not empty...then empty it first before adding players
+        //avoids resubmission issue
+        if(!team.getPlayers().isEmpty()){
+            team.setPlayers(new ArrayList<>());
+        }
         for(int i=0; i<numPlayersOnTeam; i++) {
             Integer playerNum = i + 1;
             team.getPlayers().add(new Player("Player " + playerNum.toString()));
         }
     }
 
-    public void addWordsToGame(TeamPlayerNumbers teamPlayerNumbers, GameSingleton game) {
+    public void addWordsToGame(TeamPlayerNumbers teamPlayerNumbers) {
+        //if for some reason the game already has words...then empty it first before adding words
+        //avoids resubmission issue
+        if(!GameSingleton.getInstance().getWords().isEmpty()){
+            GameSingleton.getInstance().setWords(new ArrayList<>());
+        }
+        GameSingleton.getInstance().getWords().add("test word");
         int totalPlayers = teamPlayerNumbers.getNumPlayersTeamOne() + teamPlayerNumbers.getNumPlayersTeamTwo();
-        //TODO - maybe allow users to determine this multiple number?
         int numOfWordsForGame = totalPlayers * 5;
         List<String> gameWords = selectRandomWordsFromFile(WORDS_FILE_PATH, numOfWordsForGame);
-        game.getWords().addAll(gameWords);
+        GameSingleton.getInstance().getWords().addAll(gameWords);
     }
 
     private List<String> selectRandomWordsFromFile(String fileName, int numOfWordsToGet) {

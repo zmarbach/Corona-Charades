@@ -17,6 +17,11 @@
       </div>
 
       <div>
+          <h2> Number of players in player form: </h2>
+          <h2> ${numOfPlayersInPlayerForm} </h2>
+      </div>
+
+      <div>
         <h3>Game Word List: </h3>
         <c:forEach items="${game.words}" var="word">
             <h6>${word}</h6>
