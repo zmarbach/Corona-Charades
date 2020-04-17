@@ -32,6 +32,7 @@ public class GameSetUpController {
     public String addNumberOfPlayersToTeams(@ModelAttribute("teamPlayerNumbers") TeamPlayerNumbers teamPlayerNumbers, Model model){
         gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamOne(), GAME.getTeamOne());
         gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamTwo(), GAME.getTeamTwo());
+        gameSetUpService.addWordsToGame(teamPlayerNumbers, GAME);
         model.addAttribute("game", GAME);
         return "player-names";
     }
