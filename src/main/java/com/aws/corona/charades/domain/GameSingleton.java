@@ -13,18 +13,15 @@ public class GameSingleton {
     private Team teamTwo;
     private List<String> words;
 
-    private GameSingleton(Team teamOne, Team teamTwo, List<String> words) {
-        this.teamOne = teamOne;
-        this.teamTwo = teamTwo;
-        this.words = words;
+    private GameSingleton() {
+        this.teamOne = new Team("Team One", new ArrayList<>(), 0);
+        this.teamTwo = new Team("Team One", new ArrayList<>(), 0);
+        this.words = new ArrayList<>();
     }
 
     public static synchronized GameSingleton getInstance(){
         if(INSTANCE == null){
-            INSTANCE = new GameSingleton(
-                    new Team("Team One", new ArrayList<Player>(), 0),
-                    new Team("Team Two", new ArrayList<Player>(), 0),
-                    new ArrayList<String>());
+            INSTANCE = new GameSingleton();
         }
         return INSTANCE;
     }
@@ -33,24 +30,12 @@ public class GameSingleton {
         return teamOne;
     }
 
-    public void setTeamOne(Team teamOne) {
-        this.teamOne = teamOne;
-    }
-
     public Team getTeamTwo() {
         return teamTwo;
     }
 
-    public void setTeamTwo(Team teamTwo) {
-        this.teamTwo = teamTwo;
-    }
-
     public List<String> getWords() {
         return words;
-    }
-
-    public void setWords(List<String> words) {
-        this.words = words;
     }
 
     @Override

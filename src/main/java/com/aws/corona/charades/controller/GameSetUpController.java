@@ -18,7 +18,6 @@ public class GameSetUpController {
 
     private final String siteName;
     private GameSetUpService gameSetUpService = new GameSetUpService();
-    private static final GameSingleton GAME = GameSingleton.getInstance();
 
     public GameSetUpController(final String siteName) {
         this.siteName = siteName;
@@ -27,25 +26,24 @@ public class GameSetUpController {
     //HOME PAGE - initialize game and team player numbers form is displayed
     @GetMapping(value = "/teams/add-num-of-players")
     public String displayTeamsForm(Model model) {
-        model.addAttribute("game", GAME);
         model.addAttribute("teamPlayerNumbers", new TeamPlayerNumbers(0,0));
         return "teams";
     }
     //add number of players for each team, then go to player-names page
     @PostMapping("/teams/add-num-of-players")
     public String addNumberOfPlayersToTeams(@ModelAttribute("teamPlayerNumbers") TeamPlayerNumbers teamPlayerNumbers, Model model){
-        gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamOne(), GAME.getTeamOne());
-        gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamTwo(), GAME.getTeamTwo());
-        gameSetUpService.addWordsToGame(teamPlayerNumbers, GAME);
-        model.addAttribute("game", GAME);
+        gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamOne(), GameSingleton.getInstance().getTeamOne());
+        gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamTwo(), GameSingleton.getInstance().getTeamTwo());
+        gameSetUpService.addWordsToGame(teamPlayerNumbers, GameSingleton.getInstance());
+        model.addAttribute("game", GameSingleton.getInstance());
         return "player-names-team-one";
     }
 
     @GetMapping("/player-names-team-one")
     public String displayPlayerNamesForTeamOne(Model model){
-        PlayerForm playerForm = new PlayerForm(GAME.getTeamOne().getPlayers());
+        PlayerForm playerForm = new PlayerForm(GameSingleton.getInstance().getTeamOne().getPlayers());
         model.addAttribute("playerForm", playerForm);
-        model.addAttribute("game", GAME);
+        model.addAttribute("game", GameSingleton.getInstance());
         return "player-names-team-one";
     }
 
@@ -53,14 +51,14 @@ public class GameSetUpController {
     public String updateTeamOnePlayerNames(@ModelAttribute("playerForm") PlayerForm playerForm){
         List<Player> players = playerForm.getPlayers();
         for (int i=0; i<players.size(); i++){
-            GAME.getTeamOne().getPlayers().get(i).setName(players.get(i).getName());
+            GameSingleton.getInstance().getTeamOne().getPlayers().get(i).setName(players.get(i).getName());
         }
         return "player-names-team-two";
     }
 
     @GetMapping("/player-names-team-two")
     public String displayPlayerNamesForTeamTwo(Model model){
-        PlayerForm playerForm = new PlayerForm(GAME.getTeamTwo().getPlayers());
+        PlayerForm playerForm = new PlayerForm(GameSingleton.getInstance().getTeamTwo().getPlayers());
         model.addAttribute("playerForm", playerForm);
         return "player-names-team-two";
     }
@@ -70,7 +68,7 @@ public class GameSetUpController {
         //update player names
         List<Player> players = playerForm.getPlayers();
         for (int i=0; i<players.size(); i++){
-            GAME.getTeamTwo().getPlayers().get(i).setName(players.get(i).getName());
+            GameSingleton.getInstance().getTeamTwo().getPlayers().get(i).setName(players.get(i).getName());
         }
         //finished with set up...go to game play
         return "game-play";
