@@ -23,7 +23,7 @@
 
       <div>
         <h3>Game Active Words List: </h3>
-        <c:forEach items="${game.activeWords}" var="word">
+        <c:forEach items="${activeWords}" var="word">
             <h6>${word}</h6>
             <br />
         </c:forEach>
