@@ -32,7 +32,7 @@ public class GameSetUpController {
     public String addNumberOfPlayersToTeams(@ModelAttribute("teamPlayerNumbers") TeamPlayerNumbers teamPlayerNumbers, Model model){
         gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamOne(), GameSingleton.getInstance().getTeamOne());
         gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamTwo(), GameSingleton.getInstance().getTeamTwo());
-        gameSetUpService.addWordsToGame(teamPlayerNumbers, GameSingleton.getInstance());
+        gameSetUpService.addWordsToGame(teamPlayerNumbers);
         model.addAttribute("game", GameSingleton.getInstance());
         return "player-names-team-one";
     }
@@ -42,6 +42,7 @@ public class GameSetUpController {
         PlayerForm playerForm = new PlayerForm();
         playerForm.setPlayers(GameSingleton.getInstance().getTeamOne().getPlayers());
         model.addAttribute("playerForm", playerForm);
+        model.addAttribute("numOfPlayersInPlayerForm", playerForm.getPlayers().size());
         model.addAttribute("game", GameSingleton.getInstance());
         return "player-names-team-one";
     }
