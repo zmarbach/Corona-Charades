@@ -36,14 +36,14 @@ public class GameSetUpService {
     public void addWordsToGame(TeamPlayerNumbers teamPlayerNumbers) {
         //if for some reason the game already has words...then empty it first before adding words
         //avoids resubmission issue
-        if(!GameSingleton.getInstance().getWords().isEmpty()){
-            GameSingleton.getInstance().setWords(new ArrayList<>());
+        if(!GameSingleton.getInstance().getActiveWords().isEmpty()){
+            GameSingleton.getInstance().setActiveWords(new ArrayList<>());
         }
-        GameSingleton.getInstance().getWords().add("test word");
+        GameSingleton.getInstance().getActiveWords().add("test word");
         int totalPlayers = teamPlayerNumbers.getNumPlayersTeamOne() + teamPlayerNumbers.getNumPlayersTeamTwo();
         int numOfWordsForGame = totalPlayers * 5;
         List<String> gameWords = selectRandomWordsFromFile(WORDS_FILE_PATH, numOfWordsForGame);
-        GameSingleton.getInstance().getWords().addAll(gameWords);
+        GameSingleton.getInstance().getActiveWords().addAll(gameWords);
     }
 
     private List<String> selectRandomWordsFromFile(String fileName, int numOfWordsToGet) {
