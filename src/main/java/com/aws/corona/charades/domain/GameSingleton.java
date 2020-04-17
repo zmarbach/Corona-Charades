@@ -2,7 +2,7 @@ package com.aws.corona.charades.domain;
 
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,9 +22,9 @@ public class GameSingleton {
     public static synchronized GameSingleton getInstance(){
         if(INSTANCE == null){
             INSTANCE = new GameSingleton(
-                    new Team("Team One", Collections.<Player>emptyList(), 0),
-                    new Team("Team Two", Collections.<Player>emptyList(), 0),
-                    Collections.<String>emptyList());
+                    new Team("Team One", new ArrayList<Player>(), 0),
+                    new Team("Team Two", new ArrayList<Player>(), 0),
+                    new ArrayList<String>());
         }
         return INSTANCE;
     }

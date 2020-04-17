@@ -2,15 +2,16 @@ package com.aws.corona.charades.domain;
 
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Component
 public class GameBuilder {
 
-    private static final Team DEFAULT_TEAM_ONE = new Team("Team One", Collections.<Player>emptyList(), 0);
-    private static final Team DEFAULT_TEAM_TWO = new Team("Team Two", Collections.<Player>emptyList(), 0);
-    private static final List<String> DEFAULT_WORDS = Collections.emptyList();
+    private static final Team DEFAULT_TEAM_ONE = new Team("Team One", new ArrayList<Player>(), 0);
+    private static final Team DEFAULT_TEAM_TWO = new Team("Team Two", new ArrayList<Player>(), 0);
+    private static final List<String> DEFAULT_WORDS = new ArrayList<>();
 
     private GameSingleton gameSingleton;
 
