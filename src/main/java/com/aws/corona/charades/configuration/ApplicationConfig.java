@@ -19,7 +19,7 @@ public class ApplicationConfig {
 
     @Bean
     public GameSetUpController helloWorld() {
-        return new GameSetUpController(this.siteName);
+        return new GameSetUpController();
     }
 
     /**
