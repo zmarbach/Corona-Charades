@@ -8,7 +8,7 @@
           <form:form action="/player-names-team-one" method="POST" modelAttribute="playerForm">
 
               <c:forEach items="${playerForm.players}" var="player" varStatus="status">
-                  <form:input path="players[${status.index}].name" value="${player.name}" type="text"/>
+                  <form:input path="players[${status.index}].name" placeholder="${player.name}" type="text"/>
               </c:forEach>
 
               <input type="submit" value="Save Player Names" />

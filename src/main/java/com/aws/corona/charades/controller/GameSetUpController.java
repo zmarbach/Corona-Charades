@@ -16,20 +16,20 @@ import java.util.List;
 @Controller
 public class GameSetUpController {
 
+    //TODO - move GAME back up as class level variable...cleaner code!!!
     private GameSetUpService gameSetUpService = new GameSetUpService();
 
     public GameSetUpController() {
     }
 
-    //HOME PAGE - initialize game and team player numbers form is displayed
-    @GetMapping(value = "/teams/add-num-of-players")
+    @GetMapping(value = "/teams")
     public String displayTeamsForm(Model model) {
         model.addAttribute("teamPlayerNumbers", new TeamPlayerNumbers(0,0));
         return "teams";
     }
 
     //add number of players for each team, then go to player-names page
-    @PostMapping("/teams/add-num-of-players")
+    @PostMapping("/teams")
     public String addNumberOfPlayersToTeams(@ModelAttribute("teamPlayerNumbers") TeamPlayerNumbers teamPlayerNumbers){
         gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamOne(), GameSingleton.getInstance().getTeamOne());
         gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamTwo(), GameSingleton.getInstance().getTeamTwo());
@@ -56,7 +56,7 @@ public class GameSetUpController {
         for (int i=0; i<players.size(); i++){
             GameSingleton.getInstance().getTeamOne().getPlayers().get(i).setName(players.get(i).getName());
         }
-        return "player-names-team-two";
+        return "redirect:/player-names-team-two";
     }
 
     @GetMapping("/player-names-team-two")
