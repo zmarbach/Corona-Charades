@@ -20,22 +20,16 @@ public class GameSetUpController {
         this.siteName = siteName;
     }
 
-    //this functions as home page. When hit, create new game and redirect to /teams endpoint
-    @GetMapping("/game/new")
-    public String newGame(Model model){
-        model.addAttribute("game", GAME);
-        return "teams";
-    }
-
-    //initial team player numbers form is displayed
-    @GetMapping(value = "/teams")
+    //HOME PAGE - initialize game and team player numbers form is displayed
+    @GetMapping(value = "/teams/add-num-of-players")
     public String displayTeamsForm(Model model) {
+        model.addAttribute("game", GAME);
         model.addAttribute("teamPlayerNumbers", new TeamPlayerNumbers(0,0));
         return "teams";
     }
     //add number of players for each team, then go to player-names page
-    @PostMapping("/add-num-of-players")
-    public String addNumberOfPlayersToTeams(@ModelAttribute("teamPlayerNumbers")TeamPlayerNumbers teamPlayerNumbers, Model model){
+    @PostMapping("/teams/add-num-of-players")
+    public String addNumberOfPlayersToTeams(@ModelAttribute("teamPlayerNumbers") TeamPlayerNumbers teamPlayerNumbers, Model model){
         gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamOne(), GAME.getTeamOne());
         gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamTwo(), GAME.getTeamTwo());
         model.addAttribute("game", GAME);
