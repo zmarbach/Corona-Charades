@@ -45,6 +45,7 @@ public class GameSetUpController {
     public String displayPlayerNamesForTeamOne(Model model){
         PlayerForm playerForm = new PlayerForm(GAME.getTeamOne().getPlayers());
         model.addAttribute("playerForm", playerForm);
+        model.addAttribute("game", GAME);
         return "player-names-team-one";
     }
 

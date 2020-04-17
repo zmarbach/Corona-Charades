@@ -18,7 +18,24 @@
 
       <div>
         <c:forEach items="${game.words}" var="word">
+            <h3>Game Word List: </h3>
             <h6>${word}</h6>
+            <br />
+        </c:forEach>
+      </div>
+
+      <div>
+          <c:forEach items="${game.teamOne.players}" var="player">
+              <h3>Team One Player List: </h3>
+              <h6>${player.name}</h6>
+              <br />
+          </c:forEach>
+      </div>
+
+      <div>
+        <c:forEach items="${game.teamTwo.players}" var="player">
+            <h3>Team Two Player List: </h3>
+            <h6>${player.name}</h6>
             <br />
         </c:forEach>
       </div>
