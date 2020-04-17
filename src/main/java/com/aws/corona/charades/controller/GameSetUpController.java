@@ -16,11 +16,9 @@ import java.util.List;
 @Controller
 public class GameSetUpController {
 
-    private final String siteName;
     private GameSetUpService gameSetUpService = new GameSetUpService();
 
-    public GameSetUpController(final String siteName) {
-        this.siteName = siteName;
+    public GameSetUpController() {
     }
 
     //HOME PAGE - initialize game and team player numbers form is displayed
@@ -41,7 +39,8 @@ public class GameSetUpController {
 
     @GetMapping("/player-names-team-one")
     public String displayPlayerNamesForTeamOne(Model model){
-        PlayerForm playerForm = new PlayerForm(GameSingleton.getInstance().getTeamOne().getPlayers());
+        PlayerForm playerForm = new PlayerForm();
+        playerForm.setPlayers(GameSingleton.getInstance().getTeamOne().getPlayers());
         model.addAttribute("playerForm", playerForm);
         model.addAttribute("game", GameSingleton.getInstance());
         return "player-names-team-one";
@@ -58,7 +57,8 @@ public class GameSetUpController {
 
     @GetMapping("/player-names-team-two")
     public String displayPlayerNamesForTeamTwo(Model model){
-        PlayerForm playerForm = new PlayerForm(GameSingleton.getInstance().getTeamTwo().getPlayers());
+        PlayerForm playerForm = new PlayerForm();
+        playerForm.setPlayers(GameSingleton.getInstance().getTeamTwo().getPlayers());
         model.addAttribute("playerForm", playerForm);
         return "player-names-team-two";
     }
