@@ -36,8 +36,19 @@ public class GameSetUpController {
         return "player-names";
     }
 
-    //TODO - how to pass the game UUID after game is created so can add players, score, manipulate words, etc
-        //pass it through the url somehow. Review spring pet clinic project for example
+    @GetMapping("/player-names")
+    public String addPlayerNames(){
+        //update player names
+        return "";
+    }
+
+    @GetMapping("/game-play-screen")
+    public String updateGamePlayScreen(){
+        //do all actions necessary to update game play screen after each move and then redirect to screen again
+            //update scores and which player is up
+            //start turn, correct, skip, next player, next round, end game, etc
+        return "game-play-screen";
+    }
 
     //TODO - POST mapping for after user indicates # of players per team and clicks submit
     // pass through as parameters
