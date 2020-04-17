@@ -26,7 +26,8 @@ public class GameSetUpService {
 
     public void addPlayersToTeam(Integer numPlayersOnTeam, Team team) {
         for(int i=0; i<numPlayersOnTeam; i++) {
-            team.getPlayers().add(new Player("Player " + i+1));
+            Integer playerNum = i + 1;
+            team.getPlayers().add(new Player("Player " + playerNum.toString()));
         }
     }
 

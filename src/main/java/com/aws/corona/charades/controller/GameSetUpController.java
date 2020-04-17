@@ -1,6 +1,8 @@
 package com.aws.corona.charades.controller;
 
 import com.aws.corona.charades.domain.GameSingleton;
+import com.aws.corona.charades.domain.Player;
+import com.aws.corona.charades.domain.PlayerForm;
 import com.aws.corona.charades.domain.TeamPlayerNumbers;
 import com.aws.corona.charades.service.GameSetUpService;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class GameSetUpController {
@@ -34,30 +38,41 @@ public class GameSetUpController {
         gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamTwo(), GAME.getTeamTwo());
         gameSetUpService.addWordsToGame(teamPlayerNumbers, GAME);
         model.addAttribute("game", GAME);
-        return "player-names";
+        return "player-names-team-one";
     }
 
-    @GetMapping("/player-names")
-    public String addPlayerNames(){
+    @GetMapping("/player-names-team-one")
+    public String displayPlayerNamesForTeamOne(Model model){
+        PlayerForm playerForm = new PlayerForm(GAME.getTeamOne().getPlayers());
+        model.addAttribute("playerForm", playerForm);
+        return "player-names-team-one";
+    }
+
+    @PostMapping("/player-names-team-one")
+    public String updateTeamOnePlayerNames(@ModelAttribute("playerForm") PlayerForm playerForm){
+        List<Player> players = playerForm.getPlayers();
+        for (int i=0; i<players.size(); i++){
+            GAME.getTeamOne().getPlayers().get(i).setName(players.get(i).getName());
+        }
+        return "player-names-team-two";
+    }
+
+    @GetMapping("/player-names-team-two")
+    public String displayPlayerNamesForTeamTwo(Model model){
+        PlayerForm playerForm = new PlayerForm(GAME.getTeamTwo().getPlayers());
+        model.addAttribute("playerForm", playerForm);
+        return "player-names-team-two";
+    }
+
+    @PostMapping("/player-names-team-two")
+    public String updateTeamTwoPlayerNames(@ModelAttribute("playerForm") PlayerForm playerForm){
         //update player names
-        return "";
+        List<Player> players = playerForm.getPlayers();
+        for (int i=0; i<players.size(); i++){
+            GAME.getTeamTwo().getPlayers().get(i).setName(players.get(i).getName());
+        }
+        //finished with set up...go to game play
+        return "game-play";
     }
-
-    @GetMapping("/game-play-screen")
-    public String updateGamePlayScreen(){
-        //do all actions necessary to update game play screen after each move and then redirect to screen again
-            //update scores and which player is up
-            //start turn, correct, skip, next player, next round, end game, etc
-        return "game-play-screen";
-    }
-
-    //TODO - POST mapping for after user indicates # of players per team and clicks submit
-    // pass through as parameters
-        //take number of players multiply by 5? 10? Allow them to determine # of words/player?
-        //pull that many words randomly from word.txt and put in list of words for specific game
-        //default players' names to be Player 1, Player 2, etc
-
-    //TODO - POST mapping for after user player names and clicks submit
-        //same idea as above
 
 }
