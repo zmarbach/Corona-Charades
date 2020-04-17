@@ -27,14 +27,14 @@ public class GameSetUpController {
         model.addAttribute("teamPlayerNumbers", new TeamPlayerNumbers(0,0));
         return "teams";
     }
+
     //add number of players for each team, then go to player-names page
     @PostMapping("/teams/add-num-of-players")
-    public String addNumberOfPlayersToTeams(@ModelAttribute("teamPlayerNumbers") TeamPlayerNumbers teamPlayerNumbers, Model model){
+    public String addNumberOfPlayersToTeams(@ModelAttribute("teamPlayerNumbers") TeamPlayerNumbers teamPlayerNumbers){
         gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamOne(), GameSingleton.getInstance().getTeamOne());
         gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamTwo(), GameSingleton.getInstance().getTeamTwo());
         gameSetUpService.addWordsToGame(teamPlayerNumbers);
-        model.addAttribute("game", GameSingleton.getInstance());
-        return "player-names-team-one";
+        return "redirect:/player-names-team-one";
     }
 
     @GetMapping("/player-names-team-one")

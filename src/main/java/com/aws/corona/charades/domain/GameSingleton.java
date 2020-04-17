@@ -11,12 +11,14 @@ public class GameSingleton {
     private static GameSingleton INSTANCE;
     private Team teamOne;
     private Team teamTwo;
-    private List<String> words;
+    private List<String> activeWords;
+    private List<String> guessedWords;
 
     private GameSingleton() {
         this.teamOne = new Team("Team One", new ArrayList<>(), 0);
         this.teamTwo = new Team("Team One", new ArrayList<>(), 0);
-        this.words = new ArrayList<>();
+        this.activeWords = new ArrayList<>();
+        this.guessedWords = new ArrayList<>();
     }
 
     public static synchronized GameSingleton getInstance(){
@@ -34,12 +36,20 @@ public class GameSingleton {
         return teamTwo;
     }
 
-    public List<String> getWords() {
-        return words;
+    public List<String> getActiveWords() {
+        return activeWords;
     }
 
-    public void setWords(List<String> words) {
-        this.words = words;
+    public void setActiveWords(List<String> activeWords) {
+        this.activeWords = activeWords;
+    }
+
+    public List<String> getGuessedWords() {
+        return guessedWords;
+    }
+
+    public void setGuessedWords(List<String> guessedWords) {
+        this.guessedWords = guessedWords;
     }
 
     @Override
@@ -49,12 +59,12 @@ public class GameSingleton {
         GameSingleton gameSingleton = (GameSingleton) o;
         return Objects.equals(teamOne, gameSingleton.teamOne) &&
                 Objects.equals(teamTwo, gameSingleton.teamTwo) &&
-                Objects.equals(words, gameSingleton.words);
+                Objects.equals(activeWords, gameSingleton.activeWords);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(teamOne, teamTwo, words);
+        return Objects.hash(teamOne, teamTwo, activeWords);
     }
 
 }
