@@ -20,20 +20,26 @@ public class GameSetUpController {
         this.siteName = siteName;
     }
 
-    //create new game, then go to teams page
+    //this functions as home page. When hit, create new game and redirect to /teams endpoint
     @GetMapping("/game/new")
     public String newGame(Model model){
         model.addAttribute("game", GAME);
-        return "/teams";
+        return "teams";
     }
 
+    //initial team player numbers form is displayed
+    @GetMapping(value = "/teams")
+    public String displayTeamsForm(Model model) {
+        model.addAttribute("teamPlayerNumbers", new TeamPlayerNumbers(0,0));
+        return "teams";
+    }
     //add number of players for each team, then go to player-names page
     @PostMapping("/add-num-of-players")
     public String addNumberOfPlayersToTeams(@ModelAttribute("teamPlayerNumbers")TeamPlayerNumbers teamPlayerNumbers, Model model){
         gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamOne(), GAME.getTeamOne());
         gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamTwo(), GAME.getTeamTwo());
         model.addAttribute("game", GAME);
-        return "/player-names";
+        return "player-names";
     }
 
     //TODO - how to pass the game UUID after game is created so can add players, score, manipulate words, etc
