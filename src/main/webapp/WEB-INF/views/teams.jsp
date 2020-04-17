@@ -3,7 +3,7 @@
 <html>
   <body>
       <div>
-        <form:form action="/teams/add-num-of-players" method="POST" modelAttribute="teamPlayerNumbers">
+        <form:form action="/teams" method="POST" modelAttribute="teamPlayerNumbers">
             <form:label path="numPlayersTeamOne">How many players on Team One?</form:label>
             <form:input type="text" path="numPlayersTeamOne"/>
             <br />
