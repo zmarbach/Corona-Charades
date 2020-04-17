@@ -20,9 +20,6 @@ public class GameSetUpService {
     private final static String WORDS_FILE_PATH = "C:\\source\\Corona-Charades\\src\\main\\java\\com\\aws\\corona\\charades\\assets";
 
     private Random r = new Random();
-    public GameSingleton initNewGame() {
-        return GameSingleton.getInstance();
-    }
 
     public void addPlayersToTeam(Integer numPlayersOnTeam, Team team) {
         for(int i=0; i<numPlayersOnTeam; i++) {
