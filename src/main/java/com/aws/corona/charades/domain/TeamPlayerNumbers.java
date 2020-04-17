@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class TeamPlayerNumbers {
 
-    private Integer numPlayersTeamOne = 0;
-    private Integer numPlayersTeamTwo = 0;
+    private Integer numPlayersTeamOne;
+    private Integer numPlayersTeamTwo;
 
     public TeamPlayerNumbers(Integer numPlayersTeamOne, Integer numPlayersTeamTwo) {
         this.numPlayersTeamOne = numPlayersTeamOne;
