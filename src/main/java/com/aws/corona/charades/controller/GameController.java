@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-public class GameSetUpController {
+public class GameController {
 
     //TODO - move GAME back up as class level variable...cleaner code!!!
     private GameSetUpService gameSetUpService = new GameSetUpService();
+    private static final GameSingleton GAME = GameSingleton.getInstance();
 
-    public GameSetUpController() {
+    public GameController() {
     }
 
     @GetMapping(value = "/teams")
@@ -28,8 +29,8 @@ public class GameSetUpController {
     //add number of players for each team, then go to player-names page
     @PostMapping("/teams")
     public String addNumberOfPlayersToTeams(@ModelAttribute("teamPlayerNumbers") TeamPlayerNumbers teamPlayerNumbers){
-        gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamOne(), GameSingleton.getInstance().getTeamOne());
-        gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamTwo(), GameSingleton.getInstance().getTeamTwo());
+        gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamOne(), GAME.getTeamOne());
+        gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamTwo(), GAME.getTeamTwo());
         gameSetUpService.addWordsToGame(teamPlayerNumbers);
         return "redirect:/player-names-team-one";
     }
@@ -37,12 +38,11 @@ public class GameSetUpController {
     @GetMapping("/player-names-team-one")
     public String displayPlayerNamesForTeamOne(Model model){
         PlayerForm playerForm = new PlayerForm();
-        playerForm.setPlayers(GameSingleton.getInstance().getTeamOne().getPlayers());
+        playerForm.setPlayers(GAME.getTeamOne().getPlayers());
         model.addAttribute("playerForm", playerForm);
-        model.addAttribute("numOfPlayersInPlayerForm", playerForm.getPlayers().size());
-        model.addAttribute("activeWords", GameSingleton.getInstance().getActiveWords());
-        model.addAttribute("teamOnePlayers", GameSingleton.getInstance().getTeamOne().getPlayers());
-        model.addAttribute("teamTwoPlayers", GameSingleton.getInstance().getTeamTwo().getPlayers());
+        model.addAttribute("activeWords", GAME.getActiveWords());
+        model.addAttribute("teamOnePlayers", GAME.getTeamOne().getPlayers());
+        model.addAttribute("teamTwoPlayers", GAME.getTeamTwo().getPlayers());
         return "player-names-team-one";
     }
 
@@ -50,7 +50,7 @@ public class GameSetUpController {
     public String updateTeamOnePlayerNames(@ModelAttribute("playerForm") PlayerForm playerForm){
         List<Player> players = playerForm.getPlayers();
         for (int i=0; i<players.size(); i++){
-            GameSingleton.getInstance().getTeamOne().getPlayers().get(i).setName(players.get(i).getName());
+            GAME.getTeamOne().getPlayers().get(i).setName(players.get(i).getName());
         }
         return "redirect:/player-names-team-two";
     }
@@ -58,17 +58,16 @@ public class GameSetUpController {
     @GetMapping("/player-names-team-two")
     public String displayPlayerNamesForTeamTwo(Model model){
         PlayerForm playerForm = new PlayerForm();
-        playerForm.setPlayers(GameSingleton.getInstance().getTeamTwo().getPlayers());
+        playerForm.setPlayers(GAME.getTeamTwo().getPlayers());
         model.addAttribute("playerForm", playerForm);
         return "player-names-team-two";
     }
 
     @PostMapping("/player-names-team-two")
     public String updateTeamTwoPlayerNames(@ModelAttribute("playerForm") PlayerForm playerForm){
-        //update player names
         List<Player> players = playerForm.getPlayers();
         for (int i=0; i<players.size(); i++){
-            GameSingleton.getInstance().getTeamTwo().getPlayers().get(i).setName(players.get(i).getName());
+            GAME.getTeamTwo().getPlayers().get(i).setName(players.get(i).getName());
         }
         return "redirect:/game-play";
     }
@@ -76,7 +75,6 @@ public class GameSetUpController {
     @GetMapping("/game-play")
     public String updateGamePlayPage(Model model){
         model.addAttribute("test", "test");
-        GameSingleton GAME = GameSingleton.getInstance();
         GamePlayViewForm gamePlayViewForm = new GamePlayViewForm(
                 GAME.getCurrentWord(),
                 GAME.getCurrentPlayer(),
@@ -84,6 +82,20 @@ public class GameSetUpController {
                 GAME.getTeamOne().getScore(),
                 GAME.getTeamTwo().getScore());
         model.addAttribute("gamePlayViewForm", gamePlayViewForm);
+        return "game-play";
+    }
+
+    @PostMapping("/correct")
+    public String handleCorrectGuess(){
+        //delegate to gamePlayService method
+        //update model attributes
+        return "game-play";
+    }
+
+    @PostMapping("/skip")
+    public String handleSkip(){
+        //delegate to gamePlayService method
+        //update model attributes
         return "game-play";
     }
 }
