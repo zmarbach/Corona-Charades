@@ -5,12 +5,12 @@
       <div>
           <table>
             <tr>
-                <td>Placeholder for current player name ${gamePlayViewForm.currentPlayer.name}</td>
-                <td>Placeholder for current team name ${gamePlayViewForm.currentTeam.name}</td>
+                <td>Current player: ${gamePlayViewForm.currentPlayer.name}</td>
+                <td>Current team: ${gamePlayViewForm.currentTeam.name}</td>
             </tr>
             <tr>
-                <td>Placeholder for Team One score ${gamePlayViewForm.teamOneScore}</td>
-                <td>Placeholder for Team Two score ${gamePlayViewForm.teamTwoScore}</td>
+                <td>Team One score: ${gamePlayViewForm.teamOneScore}</td>
+                <td>Team Two score: ${gamePlayViewForm.teamTwoScore}</td>
             </tr>
           </table>
 
@@ -31,10 +31,6 @@
 
           <button type="button"> Next Player </button>
           <button type="button"> Next Round </button>
-
-          <br />
-
-          <h2>${test}</h2>
       </div>
   </body>
 </html>

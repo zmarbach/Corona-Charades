@@ -5,7 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-import com.aws.corona.charades.controller.GameSetUpController;
+import com.aws.corona.charades.controller.GameController;
 
 @Configuration
 @ComponentScan({ "com.aws.corona.charades.configuration" })
@@ -13,8 +13,8 @@ import com.aws.corona.charades.controller.GameSetUpController;
 public class ApplicationConfig {
 
     @Bean
-    public GameSetUpController helloWorld() {
-        return new GameSetUpController();
+    public GameController helloWorld() {
+        return new GameController();
     }
 
 }
