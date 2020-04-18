@@ -4,14 +4,11 @@ import com.aws.corona.charades.domain.GameSingleton;
 import com.aws.corona.charades.domain.Player;
 import com.aws.corona.charades.domain.Team;
 import com.aws.corona.charades.domain.TeamPlayerNumbers;
-import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
