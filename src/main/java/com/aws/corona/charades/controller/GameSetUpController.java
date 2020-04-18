@@ -1,9 +1,6 @@
 package com.aws.corona.charades.controller;
 
-import com.aws.corona.charades.domain.GameSingleton;
-import com.aws.corona.charades.domain.Player;
-import com.aws.corona.charades.domain.PlayerForm;
-import com.aws.corona.charades.domain.TeamPlayerNumbers;
+import com.aws.corona.charades.domain.*;
 import com.aws.corona.charades.service.GameSetUpService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -74,5 +71,19 @@ public class GameSetUpController {
             GameSingleton.getInstance().getTeamTwo().getPlayers().get(i).setName(players.get(i).getName());
         }
         return "redirect:/game-play";
+    }
+
+    @GetMapping("/game-play")
+    public String updateGamePlayPage(Model model){
+        model.addAttribute("test", "test");
+        GameSingleton GAME = GameSingleton.getInstance();
+        GamePlayViewForm gamePlayViewForm = new GamePlayViewForm(
+                GAME.getCurrentWord(),
+                GAME.getCurrentPlayer(),
+                GAME.getCurrentTeam(),
+                GAME.getTeamOne().getScore(),
+                GAME.getTeamTwo().getScore());
+        model.addAttribute("gamePlayViewForm", gamePlayViewForm);
+        return "game-play";
     }
 }

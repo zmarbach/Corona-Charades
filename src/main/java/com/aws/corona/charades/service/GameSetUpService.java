@@ -4,6 +4,7 @@ import com.aws.corona.charades.domain.GameSingleton;
 import com.aws.corona.charades.domain.Player;
 import com.aws.corona.charades.domain.Team;
 import com.aws.corona.charades.domain.TeamPlayerNumbers;
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -18,13 +19,11 @@ import java.util.Random;
 @Service
 public class GameSetUpService {
 
-    private final static String WORDS_FILE_NAME = "words.txt";
+    private final static String WORDS_FILE_PATH = "C:/source/Corona-Charades/src/main/java/com/aws/corona/charades/assets/words.txt";
 
     private Random r = new Random();
 
     public void addPlayersToTeam(Integer numPlayersOnTeam, Team team) {
-        //if for some reason the team is not empty...then empty it first before adding players
-        //avoids resubmission issue
         if(!team.getPlayers().isEmpty()){
             team.setPlayers(new ArrayList<>());
         }
@@ -41,19 +40,21 @@ public class GameSetUpService {
         GameSingleton.getInstance().getActiveWords().add("test word");
         int totalPlayers = teamPlayerNumbers.getNumPlayersTeamOne() + teamPlayerNumbers.getNumPlayersTeamTwo();
         int numOfWordsForGame = totalPlayers * 5;
-        List<String> gameWords = selectRandomWordsFromFile(WORDS_FILE_NAME, numOfWordsForGame);
+        List<String> gameWords = selectRandomWordsFromFile(WORDS_FILE_PATH, numOfWordsForGame);
         GameSingleton.getInstance().getActiveWords().addAll(gameWords);
     }
 
-    private List<String> selectRandomWordsFromFile(String fileName, int numOfWordsToGet) {
+    private List<String> selectRandomWordsFromFile(String filePath, int numOfWordsToGet) {
         try {
-            List<String> words = Files.readAllLines(new File(fileName).toPath(), Charset.forName("utf-8"));
-            List<String> selectedWords = new ArrayList<>();
-            for(int i=0; i<numOfWordsToGet; i++){
-                String selectedWord = words.get(r.nextInt(words.size()));
-                selectedWords.add(selectedWord);
-                words.remove(selectedWord);
-            }
+            List<String> words = FileUtils.readLines(new File(filePath), "utf-8");
+            return words;
+//            List<String> selectedWords = new ArrayList<>();
+//            for(int i=0; i<numOfWordsToGet; i++){
+//                String selectedWord = words.get(r.nextInt(words.size()));
+//                selectedWords.add(selectedWord);
+//                words.remove(selectedWord);
+//            }
+//            return selectedWords;
         }
         catch (FileNotFoundException e){
             System.out.println("File not found");
@@ -66,6 +67,5 @@ public class GameSetUpService {
             list.add(e.getMessage());
             return list;
         }
-        return new ArrayList<>();
     }
 }
