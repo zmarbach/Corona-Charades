@@ -18,7 +18,6 @@ import java.util.Scanner;
 public class GameSetUpService {
 
     private final static String WORDS_FILE_PATH = "C:\\source\\Corona-Charades\\words.txt";
-
     private Random r = new Random();
 
     public void addPlayersToTeam(Integer numPlayersOnTeam, Team team) {
@@ -37,7 +36,14 @@ public class GameSetUpService {
         }
         int totalPlayers = teamPlayerNumbers.getNumPlayersTeamOne() + teamPlayerNumbers.getNumPlayersTeamTwo();
         int numOfWordsForGame = totalPlayers * 5;
-        List<String> gameWords = selectRandomWordsFromFile(WORDS_FILE_PATH, numOfWordsForGame);
+//        List<String> gameWords = selectRandomWordsFromFile(WORDS_FILE_PATH, numOfWordsForGame);
+        List<String> gameWords = new ArrayList<>();
+        gameWords.add("test1");
+        gameWords.add("test2");
+        gameWords.add("test3");
+        gameWords.add("test4");
+        gameWords.add("test5");
+        gameWords.add("test6");
         GameSingleton.getInstance().getActiveWords().addAll(gameWords);
     }
 

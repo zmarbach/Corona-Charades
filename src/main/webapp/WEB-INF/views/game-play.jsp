@@ -16,11 +16,13 @@
 
           <br />
 
-          <button type="button"> Start turn </button>
+            <form action="/start-turn" method="post">
+                <input type="submit" value="Start turn" />
+            </form>
 
           <br />
 
-          <h1> CURRENT WORD ${gamePlayViewForm.currentWord}</h1>
+          <h1>${gamePlayViewForm.currentWord}</h1>
 
           <br />
 

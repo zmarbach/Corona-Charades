@@ -1,6 +1,7 @@
 package com.aws.corona.charades.controller;
 
 import com.aws.corona.charades.domain.*;
+import com.aws.corona.charades.service.GamePlayService;
 import com.aws.corona.charades.service.GameSetUpService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import java.util.List;
 public class GameController {
 
     private GameSetUpService gameSetUpService = new GameSetUpService();
+    private GamePlayService gamePlayService = new GamePlayService();
     private static final GameSingleton GAME = GameSingleton.getInstance();
 
     public GameController() {
@@ -74,7 +76,6 @@ public class GameController {
 
     @GetMapping("/game-play")
     public String updateGamePlayPage(Model model){
-        model.addAttribute("test", "test");
         GamePlayViewForm gamePlayViewForm = new GamePlayViewForm(
                 GAME.getCurrentWord(),
                 GAME.getCurrentPlayer(),
@@ -87,8 +88,7 @@ public class GameController {
 
     @PostMapping("/start-turn")
     public String startTurn(){
-        //delegate to gamePlayService method
-        //update model attributes
+        gamePlayService.handleStartTurn();
         return "game-play";
     }
 
