@@ -75,7 +75,7 @@ public class GameSetUpController {
             GameSingleton.getInstance().getTeamTwo().getPlayers().get(i).setName(players.get(i).getName());
         }
         //finished with set up...go to game play
-        return "game-play";
+        return "redirect:/game-play";
     }
 
 }

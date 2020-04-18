@@ -13,12 +13,16 @@ public class GameSingleton {
     private Team teamTwo;
     private List<String> activeWords;
     private List<String> guessedWords;
+    private String currentWord;
+    private Player currentPlayer;
 
     private GameSingleton() {
         this.teamOne = new Team("Team One", new ArrayList<>(), 0);
         this.teamTwo = new Team("Team One", new ArrayList<>(), 0);
         this.activeWords = new ArrayList<>();
         this.guessedWords = new ArrayList<>();
+        this.currentWord = "";
+        this.currentPlayer = new Player("");
     }
 
     public static synchronized GameSingleton getInstance(){
@@ -50,6 +54,22 @@ public class GameSingleton {
 
     public void setGuessedWords(List<String> guessedWords) {
         this.guessedWords = guessedWords;
+    }
+
+    public String getCurrentWord() {
+        return currentWord;
+    }
+
+    public void setCurrentWord(String currentWord) {
+        this.currentWord = currentWord;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
     @Override
