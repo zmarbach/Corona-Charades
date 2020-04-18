@@ -17,7 +17,7 @@ import java.util.Random;
 @Service
 public class GameSetUpService {
 
-    private final static String WORDS_FILE_PATH = "C:/source/Corona-Charades/src/main/java/com/aws/corona/charades/assets";
+    private final static String WORDS_FILE_PATH = "C:/source/Corona-Charades/src/main/java/com/aws/corona/charades/assets/words.txt";
 
     private Random r = new Random();
 
