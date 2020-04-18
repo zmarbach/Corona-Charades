@@ -35,6 +35,12 @@
 
           <button type="button"> Next Player </button>
           <button type="button"> Next Round </button>
+
+          <br />
+          <br />
+          <br />
+
+          <button type="button"> End Game </button>
       </div>
   </body>
 </html>
