@@ -1,6 +1,7 @@
 package com.aws.corona.charades.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,11 +18,12 @@ public class GamePlayController {
     //methods to handle each of the buttons on main game play screen. (Start turn, Correct, Skip, Next player, etc)
     //delegate logic to GamePlayHandler
 
-    @GetMapping("/game-play-screen")
-    public String updateGamePlayScreen(){
+    @GetMapping("/game-play")
+    public String updateGamePlayPage(Model model){
+        model.addAttribute("test", "test");
         //do all actions necessary to update game play screen after each move and then redirect to screen again
         //update scores and which player is up
         //start turn, correct, skip, next player, next round, end game, etc
-        return "game-play-screen";
+        return "game-play";
     }
 }

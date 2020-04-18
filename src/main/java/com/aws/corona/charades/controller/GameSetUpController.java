@@ -77,5 +77,4 @@ public class GameSetUpController {
         //finished with set up...go to game play
         return "redirect:/game-play";
     }
-
 }
