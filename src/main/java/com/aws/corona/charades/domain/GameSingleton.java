@@ -15,6 +15,7 @@ public class GameSingleton {
     private List<String> guessedWords;
     private String currentWord;
     private Player currentPlayer;
+    private Team currentTeam;
 
     private GameSingleton() {
         this.teamOne = new Team("Team One", new ArrayList<>(), 0);
@@ -23,6 +24,7 @@ public class GameSingleton {
         this.guessedWords = new ArrayList<>();
         this.currentWord = "";
         this.currentPlayer = new Player("");
+        this.currentTeam = new Team("", new ArrayList<>(), 0);
     }
 
     public static synchronized GameSingleton getInstance(){
@@ -87,4 +89,7 @@ public class GameSingleton {
         return Objects.hash(teamOne, teamTwo, activeWords);
     }
 
+    public Team getCurrentTeam() {
+        return null;
+    }
 }
