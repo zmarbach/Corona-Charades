@@ -13,7 +13,6 @@ import java.util.List;
 @Controller
 public class GameController {
 
-    //TODO - move GAME back up as class level variable...cleaner code!!!
     private GameSetUpService gameSetUpService = new GameSetUpService();
     private static final GameSingleton GAME = GameSingleton.getInstance();
 
@@ -26,7 +25,6 @@ public class GameController {
         return "teams";
     }
 
-    //add number of players for each team, then go to player-names page
     @PostMapping("/teams")
     public String addNumberOfPlayersToTeams(@ModelAttribute("teamPlayerNumbers") TeamPlayerNumbers teamPlayerNumbers){
         gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamOne(), GAME.getTeamOne());
@@ -72,6 +70,8 @@ public class GameController {
         return "redirect:/game-play";
     }
 
+    //TODO - think about separating these methods to separate controller
+
     @GetMapping("/game-play")
     public String updateGamePlayPage(Model model){
         model.addAttribute("test", "test");
@@ -85,6 +85,13 @@ public class GameController {
         return "game-play";
     }
 
+    @PostMapping("/start-turn")
+    public String startTurn(){
+        //delegate to gamePlayService method
+        //update model attributes
+        return "game-play";
+    }
+
     @PostMapping("/correct")
     public String handleCorrectGuess(){
         //delegate to gamePlayService method
@@ -94,6 +101,20 @@ public class GameController {
 
     @PostMapping("/skip")
     public String handleSkip(){
+        //delegate to gamePlayService method
+        //update model attributes
+        return "game-play";
+    }
+
+    @PostMapping("/next-player")
+    public String nextPlayer(){
+        //delegate to gamePlayService method
+        //update model attributes
+        return "game-play";
+    }
+
+    @PostMapping("/next-round")
+    public String nextRound(){
         //delegate to gamePlayService method
         //update model attributes
         return "game-play";

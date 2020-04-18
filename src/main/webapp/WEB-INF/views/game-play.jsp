@@ -28,6 +28,8 @@
           <button type="button"> Skip </button>
 
           <br />
+          <br />
+          <br />
 
           <button type="button"> Next Player </button>
           <button type="button"> Next Round </button>
