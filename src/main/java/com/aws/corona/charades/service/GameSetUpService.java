@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 @Service
 public class GameSetUpService {
@@ -46,7 +47,12 @@ public class GameSetUpService {
 
     private List<String> selectRandomWordsFromFile(String filePath, int numOfWordsToGet) {
         try {
-            List<String> words = FileUtils.readLines(new File(filePath), "utf-8");
+            Scanner scanner = new Scanner(new File(filePath));
+            List<String> words = new ArrayList<>();
+            while(scanner.hasNext()){
+                words.add(scanner.next());
+            }
+//            List<String> words = FileUtils.readLines(new File(filePath), "utf-8");
             return words;
 //            List<String> selectedWords = new ArrayList<>();
 //            for(int i=0; i<numOfWordsToGet; i++){
@@ -59,12 +65,12 @@ public class GameSetUpService {
         catch (FileNotFoundException e){
             System.out.println("File not found");
             List<String> list = new ArrayList<>();
-            list.add(e.getMessage());
+            list.add("FILENOTFOUND" + e.getMessage());
             return list;
         } catch (IOException e) {
             e.printStackTrace();
             List<String> list = new ArrayList<>();
-            list.add(e.getMessage());
+            list.add("IOEXCEPTION" + e.getMessage());
             return list;
         }
     }
