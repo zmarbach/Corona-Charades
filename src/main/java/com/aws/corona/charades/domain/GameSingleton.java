@@ -22,8 +22,8 @@ public class GameSingleton {
         this.teamTwo = new Team("Team One", new ArrayList<>(), 0);
         this.activeWords = new ArrayList<>();
         this.guessedWords = new ArrayList<>();
-        this.currentWord = "";
-        this.currentPlayer = new Player("");
+        this.currentWord = "SAMPLE WORD";
+        this.currentPlayer = new Player("DEREK JETER");
         this.currentTeam = new Team("", new ArrayList<>(), 0);
     }
 

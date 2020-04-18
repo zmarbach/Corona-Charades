@@ -8,17 +8,17 @@ public class GamePlayViewForm {
     private Player currentPlayer;
     private Team currentTeam;
     private Integer teamOneScore;
-    private Integer teamTeamTwoScore;
+    private Integer teamTwoScore;
 
     public GamePlayViewForm() {
     }
 
-    public GamePlayViewForm(String currentWord, Player currentPlayer, Team currentTeam, Integer teamOneScore, Integer teamTeamTwoScore) {
+    public GamePlayViewForm(String currentWord, Player currentPlayer, Team currentTeam, Integer teamOneScore, Integer teamTwoScore) {
         this.currentWord = currentWord;
         this.currentPlayer = currentPlayer;
         this.currentTeam = currentTeam;
         this.teamOneScore = teamOneScore;
-        this.teamTeamTwoScore = teamTeamTwoScore;
+        this.teamTwoScore = teamTwoScore;
     }
 
     public String getCurrentWord() {
@@ -53,11 +53,11 @@ public class GamePlayViewForm {
         this.teamOneScore = teamOneScore;
     }
 
-    public Integer getTeamTeamTwoScore() {
-        return teamTeamTwoScore;
+    public Integer getTeamTwoScore() {
+        return teamTwoScore;
     }
 
-    public void setTeamTeamTwoScore(Integer teamTeamTwoScore) {
-        this.teamTeamTwoScore = teamTeamTwoScore;
+    public void setTeamTwoScore(Integer teamTwoScore) {
+        this.teamTwoScore = teamTwoScore;
     }
 }
