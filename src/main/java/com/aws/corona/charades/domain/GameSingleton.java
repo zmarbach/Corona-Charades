@@ -74,6 +74,14 @@ public class GameSingleton {
         this.currentPlayer = currentPlayer;
     }
 
+    public Team getCurrentTeam() {
+        return currentTeam;
+    }
+
+    public void setCurrentTeam(Team currentTeam){
+        this.currentTeam = currentTeam;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -87,9 +95,5 @@ public class GameSingleton {
     @Override
     public int hashCode() {
         return Objects.hash(teamOne, teamTwo, activeWords);
-    }
-
-    public Team getCurrentTeam() {
-        return null;
     }
 }
