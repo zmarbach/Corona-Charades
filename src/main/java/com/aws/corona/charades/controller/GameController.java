@@ -89,7 +89,7 @@ public class GameController {
     @PostMapping("/start-turn")
     public String startTurn(){
         gamePlayService.handleStartTurn();
-        return "game-play";
+        return "redirect:/game-play";
     }
 
     @PostMapping("/correct")
@@ -118,5 +118,11 @@ public class GameController {
         //delegate to gamePlayService method
         //update model attributes
         return "game-play";
+    }
+
+    @PostMapping("/end-game")
+    public String endGame(){
+        //delete all current values in game and redirect to teams page
+        return "teams";
     }
 }
