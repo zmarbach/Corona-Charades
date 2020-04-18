@@ -57,12 +57,12 @@ public class GameSetUpService {
         catch (FileNotFoundException e){
             System.out.println("File not found");
             List<String> list = new ArrayList<>();
-            list.add("FileNotFoundExceptionOccurred");
+            list.add(e.getMessage());
             return list;
         } catch (IOException e) {
             e.printStackTrace();
             List<String> list = new ArrayList<>();
-            list.add("IOExceptionOccurred");
+            list.add(e.getMessage());
             return list;
         }
         return new ArrayList<>();
