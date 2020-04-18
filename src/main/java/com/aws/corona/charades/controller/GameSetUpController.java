@@ -37,7 +37,6 @@ public class GameSetUpController {
         return "redirect:/player-names-team-one";
     }
 
-    //TODO - defect - why are players names in the game instance, but not showing up on player form????
     @GetMapping("/player-names-team-one")
     public String displayPlayerNamesForTeamOne(Model model){
         PlayerForm playerForm = new PlayerForm();
@@ -74,7 +73,6 @@ public class GameSetUpController {
         for (int i=0; i<players.size(); i++){
             GameSingleton.getInstance().getTeamTwo().getPlayers().get(i).setName(players.get(i).getName());
         }
-        //finished with set up...go to game play
         return "redirect:/game-play";
     }
 }

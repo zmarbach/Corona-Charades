@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.Random;
 @Service
 public class GameSetUpService {
 
-    private final static String WORDS_FILE_PATH = "C:/source/Corona-Charades/src/main/java/com/aws/corona/charades/assets/words.txt";
+    private final static String WORDS_FILE_NAME = "words.txt";
 
     private Random r = new Random();
 
@@ -40,13 +41,13 @@ public class GameSetUpService {
         GameSingleton.getInstance().getActiveWords().add("test word");
         int totalPlayers = teamPlayerNumbers.getNumPlayersTeamOne() + teamPlayerNumbers.getNumPlayersTeamTwo();
         int numOfWordsForGame = totalPlayers * 5;
-        List<String> gameWords = selectRandomWordsFromFile(WORDS_FILE_PATH, numOfWordsForGame);
+        List<String> gameWords = selectRandomWordsFromFile(WORDS_FILE_NAME, numOfWordsForGame);
         GameSingleton.getInstance().getActiveWords().addAll(gameWords);
     }
 
     private List<String> selectRandomWordsFromFile(String fileName, int numOfWordsToGet) {
         try {
-            List<String> words = Files.readAllLines(new File(fileName).toPath());
+            List<String> words = Files.readAllLines(new File(fileName).toPath(), Charset.forName("utf-8"));
             List<String> selectedWords = new ArrayList<>();
             for(int i=0; i<numOfWordsToGet; i++){
                 String selectedWord = words.get(r.nextInt(words.size()));
