@@ -69,6 +69,12 @@ public class GameController {
         for (int i=0; i<players.size(); i++){
             GAME.getTeamTwo().getPlayers().get(i).setName(players.get(i).getName());
         }
+
+        //set player 1 from Team One as current player and Team One as current Team
+        Player playerOneTeamOne = GAME.getTeamOne().getPlayers().get(0);
+        GAME.setCurrentPlayer(playerOneTeamOne);
+        GAME.setCurrentTeam(GAME.getTeamOne());
+
         return "redirect:/game-play";
     }
 
@@ -94,30 +100,27 @@ public class GameController {
 
     @PostMapping("/correct")
     public String handleCorrectGuess(){
-        //delegate to gamePlayService method
-        //update model attributes
-        return "game-play";
+        gamePlayService.handleCorrect();
+        return "redirect:/game-play";
     }
 
     @PostMapping("/skip")
     public String handleSkip(){
-        //delegate to gamePlayService method
-        //update model attributes
-        return "game-play";
+        gamePlayService.handleSkip();
+        return "redirect:/game-play";
     }
 
     @PostMapping("/next-player")
     public String nextPlayer(){
-        //delegate to gamePlayService method
-        //update model attributes
-        return "game-play";
+        gamePlayService.handleNextPlayer();
+        return "redirect:/game-play";
     }
 
     @PostMapping("/next-round")
     public String nextRound(){
         //delegate to gamePlayService method
         //update model attributes
-        return "game-play";
+        return "redirect:/game-play";
     }
 
     @PostMapping("/end-game")
