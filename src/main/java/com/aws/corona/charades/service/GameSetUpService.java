@@ -20,7 +20,7 @@ import java.util.Scanner;
 @Service
 public class GameSetUpService {
 
-    private final static String WORDS_FILE_PATH = "src/words.txt";
+    private final static String WORDS_FILE_PATH = "C:\\source\\Corona-Charades\\words.txt";
 
     private Random r = new Random();
 
@@ -38,7 +38,6 @@ public class GameSetUpService {
         if(!GameSingleton.getInstance().getActiveWords().isEmpty()){
             GameSingleton.getInstance().setActiveWords(new ArrayList<>());
         }
-        GameSingleton.getInstance().getActiveWords().add("test word");
         int totalPlayers = teamPlayerNumbers.getNumPlayersTeamOne() + teamPlayerNumbers.getNumPlayersTeamTwo();
         int numOfWordsForGame = totalPlayers * 5;
         List<String> gameWords = selectRandomWordsFromFile(WORDS_FILE_PATH, numOfWordsForGame);
@@ -47,24 +46,19 @@ public class GameSetUpService {
 
     private List<String> selectRandomWordsFromFile(String filePath, int numOfWordsToGet) {
         try {
-            File file = new File("words.txt");
-            String absolutePath = file.getAbsolutePath();
-
             Scanner scanner = new Scanner(new File(filePath));
             List<String> words = new ArrayList<>();
-            words.add(absolutePath);
             while(scanner.hasNext()){
                 words.add(scanner.next());
             }
-//            List<String> words = FileUtils.readLines(new File(filePath), "utf-8");
-            return words;
-//            List<String> selectedWords = new ArrayList<>();
-//            for(int i=0; i<numOfWordsToGet; i++){
-//                String selectedWord = words.get(r.nextInt(words.size()));
-//                selectedWords.add(selectedWord);
-//                words.remove(selectedWord);
-//            }
-//            return selectedWords;
+
+            List<String> selectedWords = new ArrayList<>();
+            for(int i=0; i<numOfWordsToGet; i++){
+                String selectedWord = words.get(r.nextInt(words.size()));
+                selectedWords.add(selectedWord);
+                words.remove(selectedWord);
+            }
+            return selectedWords;
         }
         catch (FileNotFoundException e){
             System.out.println("File not found");
