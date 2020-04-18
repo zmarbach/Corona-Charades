@@ -5,12 +5,12 @@
       <div>
           <table>
             <tr>
-                <td>Placeholder for current player name</td>
-                <td>Placeholder for current team name</td>
+                <td>Placeholder for current player name ${gamePlayViewForm.currentPlayer.name}</td>
+                <td>Placeholder for current team name ${gamePlayViewForm.currentTeam.name}</td>
             </tr>
             <tr>
-                <td>Placeholder for Team One score</td>
-                <td>Placeholder for Team Two score</td>
+                <td>Placeholder for Team One score ${gamePlayViewForm.teamOneScore}</td>
+                <td>Placeholder for Team Two score ${gamePlayViewForm.teamTwoScore}</td>
             </tr>
           </table>
 
@@ -20,7 +20,7 @@
 
           <br />
 
-          <h1> CURRENT WORD </h1>
+          <h1> CURRENT WORD ${gamePlayViewForm.currentWord}</h1>
 
           <br />
 
