@@ -47,8 +47,12 @@ public class GameSetUpService {
 
     private List<String> selectRandomWordsFromFile(String filePath, int numOfWordsToGet) {
         try {
+            File file = new File("words.txt");
+            String absolutePath = file.getAbsolutePath();
+
             Scanner scanner = new Scanner(new File(filePath));
             List<String> words = new ArrayList<>();
+            words.add(absolutePath);
             while(scanner.hasNext()){
                 words.add(scanner.next());
             }
