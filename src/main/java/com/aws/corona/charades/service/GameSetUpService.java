@@ -17,7 +17,7 @@ import java.util.Random;
 @Service
 public class GameSetUpService {
 
-    private final static String WORDS_FILE_PATH = "C:\\source\\Corona-Charades\\src\\main\\java\\com\\aws\\corona\\charades\\assets";
+    private final static String WORDS_FILE_PATH = "C:/source/Corona-Charades/src/main/java/com/aws/corona/charades/assets";
 
     private Random r = new Random();
 
@@ -34,8 +34,6 @@ public class GameSetUpService {
     }
 
     public void addWordsToGame(TeamPlayerNumbers teamPlayerNumbers) {
-        //if for some reason the game already has words...then empty it first before adding words
-        //avoids resubmission issue
         if(!GameSingleton.getInstance().getActiveWords().isEmpty()){
             GameSingleton.getInstance().setActiveWords(new ArrayList<>());
         }
@@ -58,8 +56,14 @@ public class GameSetUpService {
         }
         catch (FileNotFoundException e){
             System.out.println("File not found");
+            List<String> list = new ArrayList<>();
+            list.add("FileNotFoundExceptionOccurred");
+            return list;
         } catch (IOException e) {
             e.printStackTrace();
+            List<String> list = new ArrayList<>();
+            list.add("IOExceptionOccurred");
+            return list;
         }
         return new ArrayList<>();
     }
