@@ -33,7 +33,7 @@ public class GameSetUpService {
         int numOfWordsForGame = totalPlayers * 5;
 
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-        String wordsPathString = Objects.requireNonNull(classLoader.getResource("/words.txt")).getPath();
+        String wordsPathString = Objects.requireNonNull(classLoader.getResource("./words.txt")).getPath();
         List<String> gameWords = selectRandomWordsFromFile(wordsPathString, numOfWordsForGame);
         gameWords.add("test1");
         gameWords.add("test2");
