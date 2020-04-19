@@ -125,6 +125,7 @@ public class GameController {
 
     @PostMapping("/end-game")
     public String endGame(){
+        gamePlayService.handleEndGame();
         //delete all current values in game and redirect to teams page
         return "teams";
     }

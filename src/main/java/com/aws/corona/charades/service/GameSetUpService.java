@@ -31,8 +31,10 @@ public class GameSetUpService {
         }
         int totalPlayers = teamPlayerNumbers.getNumPlayersTeamOne() + teamPlayerNumbers.getNumPlayersTeamTwo();
         int numOfWordsForGame = totalPlayers * 5;
-//        List<String> gameWords = selectRandomWordsFromFile(WORDS_FILE_PATH, numOfWordsForGame);
-        List<String> gameWords = new ArrayList<>();
+
+        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+        String wordsPathString = Objects.requireNonNull(classLoader.getResource("words.txt")).getPath().substring(1);
+        List<String> gameWords = selectRandomWordsFromFile(wordsPathString, numOfWordsForGame);
         gameWords.add("test1");
         gameWords.add("test2");
         gameWords.add("test3");
@@ -60,10 +62,9 @@ public class GameSetUpService {
         }
         catch (FileNotFoundException e){
             System.out.println("File not found");
-        } catch (IOException e) {
-            e.printStackTrace();
+            List<String> list = new ArrayList<>();
+            list.add("FILENOTFOUND - " + e.getMessage());
         }
         return new ArrayList<>();
     }
-
 }
