@@ -32,9 +32,7 @@ public class GameSetUpService {
         int totalPlayers = teamPlayerNumbers.getNumPlayersTeamOne() + teamPlayerNumbers.getNumPlayersTeamTwo();
         int numOfWordsForGame = totalPlayers * 5;
 
-        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-        String wordsPathString = Objects.requireNonNull(classLoader.getResource("/words.txt")).getPath();
-        List<String> gameWords = selectRandomWordsFromFile(wordsPathString, numOfWordsForGame);
+        List<String> gameWords = selectRandomWordsFromFile(numOfWordsForGame);
         gameWords.add("test1");
         gameWords.add("test2");
         gameWords.add("test3");
@@ -44,9 +42,9 @@ public class GameSetUpService {
         GameSingleton.getInstance().getActiveWords().addAll(gameWords);
     }
 
-    private List<String> selectRandomWordsFromFile(String filePath, int numOfWordsToGet) {
+    private List<String> selectRandomWordsFromFile(int numOfWordsToGet) {
         try {
-            Scanner scanner = new Scanner(new File(filePath));
+            Scanner scanner = new Scanner(new File("words.txt"));
             List<String> words = new ArrayList<>();
             while(scanner.hasNext()){
                 words.add(scanner.next());
