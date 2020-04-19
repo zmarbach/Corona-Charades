@@ -46,8 +46,8 @@ public class GameSetUpService {
         try {
             Scanner scanner = new Scanner(new File("words.txt"));
             List<String> words = new ArrayList<>();
-            while(scanner.hasNext()){
-                words.add(scanner.next());
+            while(scanner.hasNextLine()){
+                words.add(scanner.nextLine());
             }
 
             List<String> selectedWords = new ArrayList<>();

@@ -34,12 +34,24 @@ public class GameSingleton {
         return INSTANCE;
     }
 
+    public static GameSingleton getINSTANCE() {
+        return INSTANCE;
+    }
+
     public Team getTeamOne() {
         return teamOne;
     }
 
+    public void setTeamOne(Team teamOne) {
+        this.teamOne = teamOne;
+    }
+
     public Team getTeamTwo() {
         return teamTwo;
+    }
+
+    public void setTeamTwo(Team teamTwo) {
+        this.teamTwo = teamTwo;
     }
 
     public List<String> getActiveWords() {
@@ -78,7 +90,7 @@ public class GameSingleton {
         return currentTeam;
     }
 
-    public void setCurrentTeam(Team currentTeam){
+    public void setCurrentTeam(Team currentTeam) {
         this.currentTeam = currentTeam;
     }
 

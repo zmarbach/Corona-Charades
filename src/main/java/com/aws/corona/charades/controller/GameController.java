@@ -127,6 +127,6 @@ public class GameController {
     public String endGame(){
         gamePlayService.handleEndGame();
         //delete all current values in game and redirect to teams page
-        return "teams";
+        return "redirect:/teams";
     }
 }

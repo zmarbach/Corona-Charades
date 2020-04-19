@@ -1,6 +1,8 @@
 package com.aws.corona.charades.service;
 
 import com.aws.corona.charades.domain.GameSingleton;
+import com.aws.corona.charades.domain.Player;
+import com.aws.corona.charades.domain.Team;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -85,6 +87,12 @@ public class GamePlayService {
     }
 
     public void handleEndGame() {
-        GAME = null;
+        GAME.setTeamOne(new Team("Team One", new ArrayList<>(), 0));
+        GAME.setTeamTwo(new Team("Team One", new ArrayList<>(), 0));
+        GAME.setActiveWords(new ArrayList<>());
+        GAME.setGuessedWords(new ArrayList<>());
+        GAME.setCurrentWord("SAMPLE WORD");
+        GAME.setCurrentPlayer(new Player("DEREK JETER"));
+        GAME.setCurrentTeam(new Team("", new ArrayList<>(), 0));
     }
 }
