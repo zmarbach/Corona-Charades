@@ -22,25 +22,38 @@
 
           <br />
 
+<%-- Add if statement here to show red text somewhere on page to indicate no more words --%>
+
           <h1>${gamePlayViewForm.currentWord}</h1>
 
           <br />
 
-          <button type="button"> Correct! </button>
-          <button type="button"> Skip </button>
+          <form action="/correct" method="post">
+                <input type="submit" value="Correct!" />
+          </form>
+          <form action="/skip" method="post">
+                <input type="submit" value="Skip" />
+          </form>
 
           <br />
           <br />
           <br />
 
-          <button type="button"> Next Player </button>
-          <button type="button"> Next Round </button>
+          <form action="/next-player" method="post">
+                <input type="submit" value="Next Player" />
+          </form>
+          <form action="/next-round" method="post">
+                <input type="submit" value="Next Round" />
+          </form>
 
           <br />
           <br />
           <br />
 
-          <button type="button"> End Game </button>
+          <form action="/end-game" method="post">
+                <input type="submit" value="End Game" />
+          </form>
+
       </div>
   </body>
 </html>
