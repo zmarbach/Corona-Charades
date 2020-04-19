@@ -17,6 +17,12 @@ public class GamePlayService {
         incrementCurrentTeamScore();
         GAME.getActiveWords().remove(GAME.getCurrentWord());
         GAME.getGuessedWords().add(GAME.getCurrentWord());
+        if (GAME.getActiveWords().isEmpty()){
+           GAME.setCurrentWord("");
+        }
+        else{
+            GAME.setCurrentWord(GAME.getActiveWords().get(0));
+        }
     }
 
     public void handleSkip() {

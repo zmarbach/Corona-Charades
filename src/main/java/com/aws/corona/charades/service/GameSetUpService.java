@@ -6,13 +6,8 @@ import com.aws.corona.charades.domain.Team;
 import com.aws.corona.charades.domain.TeamPlayerNumbers;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 @Service
 public class GameSetUpService {
@@ -65,14 +60,10 @@ public class GameSetUpService {
         }
         catch (FileNotFoundException e){
             System.out.println("File not found");
-            List<String> list = new ArrayList<>();
-            list.add("FILENOTFOUND" + e.getMessage());
-            return list;
         } catch (IOException e) {
             e.printStackTrace();
-            List<String> list = new ArrayList<>();
-            list.add("IOEXCEPTION" + e.getMessage());
-            return list;
         }
+        return new ArrayList<>();
     }
+
 }
