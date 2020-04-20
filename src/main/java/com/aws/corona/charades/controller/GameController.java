@@ -41,8 +41,6 @@ public class GameController {
         playerForm.setPlayers(GAME.getTeamOne().getPlayers());
         model.addAttribute("playerForm", playerForm);
         model.addAttribute("activeWords", GAME.getActiveWords());
-        model.addAttribute("teamOnePlayers", GAME.getTeamOne().getPlayers());
-        model.addAttribute("teamTwoPlayers", GAME.getTeamTwo().getPlayers());
         return "player-names-team-one";
     }
 
@@ -73,8 +71,6 @@ public class GameController {
         //set player 1 from Team One as current player and Team One as current Team
         Player playerOneTeamOne = GAME.getTeamOne().getPlayers().get(0);
         GAME.setCurrentPlayer(playerOneTeamOne);
-        GAME.setCurrentTeam(GAME.getTeamOne());
-
         return "redirect:/game-play";
     }
 
@@ -85,9 +81,10 @@ public class GameController {
         GamePlayViewForm gamePlayViewForm = new GamePlayViewForm(
                 GAME.getCurrentWord(),
                 GAME.getCurrentPlayer(),
-                GAME.getCurrentTeam(),
                 GAME.getTeamOne().getScore(),
-                GAME.getTeamTwo().getScore());
+                GAME.getTeamTwo().getScore(),
+                GAME.getActiveWords(),
+                GAME.isBeginningOfNewTurn());
         model.addAttribute("gamePlayViewForm", gamePlayViewForm);
         return "game-play";
     }
@@ -118,7 +115,7 @@ public class GameController {
 
     @PostMapping("/next-round")
     public String nextRound(){
-        //delegate to gamePlayService method
+        gamePlayService.handleNextRound();
         //update model attributes
         return "redirect:/game-play";
     }

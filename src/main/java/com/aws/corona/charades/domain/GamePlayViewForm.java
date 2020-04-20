@@ -2,23 +2,27 @@ package com.aws.corona.charades.domain;
 
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class GamePlayViewForm {
     private String currentWord;
     private Player currentPlayer;
-    private Team currentTeam;
     private Integer teamOneScore;
     private Integer teamTwoScore;
+    private List<String> activeWords;
+    private boolean isBeginningOfNewTurn;
 
     public GamePlayViewForm() {
     }
 
-    public GamePlayViewForm(String currentWord, Player currentPlayer, Team currentTeam, Integer teamOneScore, Integer teamTwoScore) {
+    public GamePlayViewForm(String currentWord, Player currentPlayer, Integer teamOneScore, Integer teamTwoScore, List<String> activeWords, boolean isBeginningOfNewTurn) {
         this.currentWord = currentWord;
         this.currentPlayer = currentPlayer;
-        this.currentTeam = currentTeam;
         this.teamOneScore = teamOneScore;
         this.teamTwoScore = teamTwoScore;
+        this.activeWords = activeWords;
+        this.isBeginningOfNewTurn = isBeginningOfNewTurn;
     }
 
     public String getCurrentWord() {
@@ -37,14 +41,6 @@ public class GamePlayViewForm {
         this.currentPlayer = currentPlayer;
     }
 
-    public Team getCurrentTeam() {
-        return currentTeam;
-    }
-
-    public void setCurrentTeam(Team currentTeam) {
-        this.currentTeam = currentTeam;
-    }
-
     public Integer getTeamOneScore() {
         return teamOneScore;
     }
@@ -59,5 +55,21 @@ public class GamePlayViewForm {
 
     public void setTeamTwoScore(Integer teamTwoScore) {
         this.teamTwoScore = teamTwoScore;
+    }
+
+    public List<String> getActiveWords() {
+        return activeWords;
+    }
+
+    public void setActiveWords(List<String> activeWords) {
+        this.activeWords = activeWords;
+    }
+
+    public boolean isBeginningOfNewTurn() {
+        return isBeginningOfNewTurn;
+    }
+
+    public void setBeginningOfNewTurn(boolean beginningOfNewTurn) {
+        isBeginningOfNewTurn = beginningOfNewTurn;
     }
 }

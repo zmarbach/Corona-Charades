@@ -6,25 +6,28 @@ import com.aws.corona.charades.domain.Team;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class GamePlayService {
     private static GameSingleton GAME = GameSingleton.getInstance();
+    private Random r = new Random();
 
     public void handleStartTurn(){
-        GAME.setCurrentWord(GAME.getActiveWords().get(0));
+        List<String> activeWords = GAME.getActiveWords();
+        String randomWord = activeWords.get(r.nextInt(activeWords.size()));
+        GAME.setCurrentWord(randomWord);
+        GAME.setBeginningOfNewTurn(false);
     }
 
     public void handleCorrect() {
         String correctlyGuessedWord = GAME.getCurrentWord();
         int currentWordIndex = determineCurrentWordIndex();
 
-        //if only one word left in list and was just guessed correctly, then set current word to "", check for this on front end
-        if(GAME.getActiveWords().size() == 1){
-            GAME.setCurrentWord("");
-        }
-        else {
+        //if more than one word left
+        if(GAME.getActiveWords().size() > 1){
             GAME.setCurrentWord(determineNextWord(currentWordIndex));
         }
         GAME.getActiveWords().remove(correctlyGuessedWord);
@@ -38,27 +41,47 @@ public class GamePlayService {
         GAME.setCurrentWord(determineNextWord(currentWordIndex));
     }
 
-
-
     public void handleNextPlayer() {
-        //TODO - what to do if uneven players on each team???
-        //TODO - need to think about best way to do this...maybe store teamOnePreviousPlayer and teamTwoPreviousPlayer in GAME
-        // , so can just refer back to that when determining next player
-        // change the current team and then just determine currentPlayer by just incrementing based on previousPlayerIndex
-        int currentPlayerIndex = GAME.getCurrentTeam().getPlayers().indexOf(GAME.getCurrentPlayer());
+        setCurrentTeamsPreviousPlayer();
+        setNewCurrentPlayer();
+        GAME.setBeginningOfNewTurn(true);
+    }
 
-        changeCurrentTeam();
-
-        if(currentElementIsLastElementInList(currentPlayerIndex, GAME.getCurrentTeam().getPlayers())){
-            GAME.setCurrentPlayer(GAME.getCurrentTeam().getPlayers().get(0));
+    private void setNewCurrentPlayer() {
+        //current player is now prev player and current player
+        //current team is now other team
+        if(GAME.getCurrentPlayer().getTeam().equals(GAME.getTeamOne())){
+            int indexOfTeamOnePreviousPlayer = GAME.getTeamOne().getPlayers().indexOf(GAME.getTeamOnePreviousPlayer());
+            if(currentElementIsLastElementInList(indexOfTeamOnePreviousPlayer, GAME.getTeamOne().getPlayers())){
+                GAME.setCurrentPlayer(GAME.getTeamOne().getPlayers().get(0));
+            }
+            else{
+                GAME.setCurrentPlayer(GAME.getTeamOne().getPlayers().get(indexOfTeamOnePreviousPlayer + 1));
+            }
         }
         else{
-            GAME.setCurrentPlayer(GAME.getCurrentTeam().getPlayers().get(currentPlayerIndex));
+            int indexOfTeamTwoPreviousPlayer = GAME.getTeamTwo().getPlayers().indexOf(GAME.getTeamTwoPreviousPlayer());
+            if(currentElementIsLastElementInList(indexOfTeamTwoPreviousPlayer, GAME.getTeamTwo().getPlayers())){
+                GAME.setCurrentPlayer(GAME.getTeamTwo().getPlayers().get(0));
+            }
+            else{
+                GAME.setCurrentPlayer(GAME.getTeamTwo().getPlayers().get(indexOfTeamTwoPreviousPlayer + 1));
+            }
+        }
+    }
+
+    private void setCurrentTeamsPreviousPlayer() {
+        if(GAME.getCurrentPlayer().getTeam().equals(GAME.getTeamOne())){
+            GAME.setTeamOnePreviousPlayer(GAME.getCurrentPlayer());
+        }
+        else{
+            GAME.setTeamTwoPreviousPlayer(GAME.getCurrentPlayer());
         }
     }
 
     private void incrementCurrentTeamScore() {
-        GAME.getCurrentTeam().setScore(GAME.getCurrentTeam().getScore() + 1);
+        Team currentTeam = GAME.getCurrentPlayer().getTeam();
+        currentTeam.setScore(currentTeam.getScore() + 1);
     }
 
     private int determineCurrentWordIndex(){
@@ -77,22 +100,23 @@ public class GamePlayService {
         return elementIndex == list.size() - 1;
     }
 
-    private void changeCurrentTeam() {
-        if(GAME.getCurrentTeam().equals(GAME.getTeamOne())){
-            GAME.setCurrentTeam(GAME.getTeamTwo());
-        }
-        else{
-            GAME.setCurrentTeam(GAME.getTeamOne());
-        }
-    }
-
     public void handleEndGame() {
         GAME.setTeamOne(new Team("Team One", new ArrayList<>(), 0));
-        GAME.setTeamTwo(new Team("Team One", new ArrayList<>(), 0));
+        GAME.setTeamTwo(new Team("Team Two", new ArrayList<>(), 0));
         GAME.setActiveWords(new ArrayList<>());
         GAME.setGuessedWords(new ArrayList<>());
         GAME.setCurrentWord("SAMPLE WORD");
-        GAME.setCurrentPlayer(new Player("DEREK JETER"));
-        GAME.setCurrentTeam(new Team("", new ArrayList<>(), 0));
+        GAME.setCurrentPlayer(new Player("DEREK JETER", new Team("", new ArrayList<>(), 0)));
+        GAME.setTeamOnePreviousPlayer(new Player("Team One default previous player", new Team("", new ArrayList<>(), 0)));
+        GAME.setTeamTwoPreviousPlayer(new Player("Team Two default previous player", new Team("", new ArrayList<>(), 0)));
+    }
+
+    public void handleNextRound() {
+        GAME.setActiveWords(GAME.getGuessedWords());
+        GAME.setGuessedWords(new ArrayList<>());
+
+        Collections.shuffle(GAME.getActiveWords());
+
+        setNewCurrentPlayer();
     }
 }

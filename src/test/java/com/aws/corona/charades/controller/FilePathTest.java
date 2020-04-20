@@ -13,7 +13,7 @@ public class FilePathTest {
 
     @Test
     public void logAbsoluteFilePathOfWordsTxtToConsole(){
-        File file = new File("com/aws/corona/charades/service/words.txt");
+        File file = new File("words.txt");
         System.out.println(file.getAbsolutePath());
         assertEquals(1,1);
     }

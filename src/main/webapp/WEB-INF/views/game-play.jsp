@@ -7,7 +7,7 @@
           <table>
             <tr>
                 <td>Current player: ${gamePlayViewForm.currentPlayer.name}</td>
-                <td>Current team: ${gamePlayViewForm.currentTeam.name}</td>
+                <td>Current team: ${gamePlayViewForm.currentPlayer.team.name}</td>
             </tr>
             <tr>
                 <td>Team One score: ${gamePlayViewForm.teamOneScore}</td>
@@ -23,19 +23,20 @@
 
           <br />
 
-<%-- Add if statement here to show red text somewhere on page to indicate no more words --%>
+          <c:if test="${!gamePlayViewForm.isBeginningOfNewTurn}" >
+            <h1>${gamePlayViewForm.currentWord}</h1>
+          </c:if>
 
-          <h1>${gamePlayViewForm.currentWord}</h1>
-            <c:if test="${empty gamePlayViewForm.currentWord}">
+          <c:if test="${empty gamePlayViewForm.activeWords}">
                 <h3>All words have been guessed. Click next round to continue.</h3>
             </c:if>
           <br />
 
           <form action="/correct" method="post">
-                <input type="submit" value="Correct!" />
+                <input type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Correct!" />
           </form>
           <form action="/skip" method="post">
-                <input type="submit" value="Skip" />
+                <input type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Skip" />
           </form>
 
           <br />
