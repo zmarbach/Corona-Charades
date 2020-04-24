@@ -11,18 +11,18 @@ public class GamePlayViewForm {
     private Integer teamOneScore;
     private Integer teamTwoScore;
     private List<String> activeWords;
-    private boolean isBeginningOfNewTurn;
+    private boolean newTurn;
 
     public GamePlayViewForm() {
     }
 
-    public GamePlayViewForm(String currentWord, Player currentPlayer, Integer teamOneScore, Integer teamTwoScore, List<String> activeWords, boolean isBeginningOfNewTurn) {
+    public GamePlayViewForm(String currentWord, Player currentPlayer, Integer teamOneScore, Integer teamTwoScore, List<String> activeWords, boolean isNewTurn) {
         this.currentWord = currentWord;
         this.currentPlayer = currentPlayer;
         this.teamOneScore = teamOneScore;
         this.teamTwoScore = teamTwoScore;
         this.activeWords = activeWords;
-        this.isBeginningOfNewTurn = isBeginningOfNewTurn;
+        this.newTurn = isNewTurn;
     }
 
     public String getCurrentWord() {
@@ -65,11 +65,11 @@ public class GamePlayViewForm {
         this.activeWords = activeWords;
     }
 
-    public boolean isBeginningOfNewTurn() {
-        return isBeginningOfNewTurn;
+    public boolean isNewTurn() {
+        return newTurn;
     }
 
-    public void setBeginningOfNewTurn(boolean beginningOfNewTurn) {
-        isBeginningOfNewTurn = beginningOfNewTurn;
+    public void setNewTurn(boolean newTurn) {
+        this.newTurn = newTurn;
     }
 }

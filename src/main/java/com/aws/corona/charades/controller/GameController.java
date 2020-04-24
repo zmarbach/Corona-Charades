@@ -84,7 +84,7 @@ public class GameController {
                 GAME.getTeamOne().getScore(),
                 GAME.getTeamTwo().getScore(),
                 GAME.getActiveWords(),
-                GAME.isBeginningOfNewTurn());
+                GAME.isNewTurn());
         model.addAttribute("gamePlayViewForm", gamePlayViewForm);
         return "game-play";
     }

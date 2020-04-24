@@ -15,18 +15,16 @@ public class GameSingleton {
     private List<String> guessedWords;
     private String currentWord;
     private Player currentPlayer;
-    private Player teamOnePreviousPlayer;
-    private Player teamTwoPreviousPlayer;
-    private boolean isBeginningOfNewTurn;
+    private boolean newTurn;
 
     private GameSingleton() {
-        this.teamOne = new Team("Team One", new ArrayList<>(), 0);
-        this.teamTwo = new Team("Team Two", new ArrayList<>(), 0);
+        this.teamOne = new Team("Team One", new ArrayList<>(), 0, new Player());
+        this.teamTwo = new Team("Team Two", new ArrayList<>(), 0, new Player());
         this.activeWords = new ArrayList<>();
         this.guessedWords = new ArrayList<>();
         this.currentWord = "Click Start Turn to begin!";
-        this.currentPlayer = new Player("DEREK JETER", new Team("", new ArrayList<>(), 0));
-        this.isBeginningOfNewTurn = true;
+        this.currentPlayer = new Player("DEREK JETER", new Team("", new ArrayList<>(), 0, new Player()));
+        this.newTurn = true;
     }
 
     public static synchronized GameSingleton getInstance(){
@@ -84,28 +82,12 @@ public class GameSingleton {
         this.currentPlayer = currentPlayer;
     }
 
-    public Player getTeamOnePreviousPlayer() {
-        return teamOnePreviousPlayer;
+    public boolean isNewTurn() {
+        return newTurn;
     }
 
-    public void setTeamOnePreviousPlayer(Player teamOnePreviousPlayer) {
-        this.teamOnePreviousPlayer = teamOnePreviousPlayer;
-    }
-
-    public Player getTeamTwoPreviousPlayer() {
-        return teamTwoPreviousPlayer;
-    }
-
-    public void setTeamTwoPreviousPlayer(Player teamTwoPreviousPlayer) {
-        this.teamTwoPreviousPlayer = teamTwoPreviousPlayer;
-    }
-
-    public boolean isBeginningOfNewTurn() {
-        return isBeginningOfNewTurn;
-    }
-
-    public void setBeginningOfNewTurn(boolean beginningOfNewTurn) {
-        isBeginningOfNewTurn = beginningOfNewTurn;
+    public void setNewTurn(boolean newTurn) {
+        this.newTurn = newTurn;
     }
 
     @Override
@@ -113,18 +95,17 @@ public class GameSingleton {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GameSingleton that = (GameSingleton) o;
-        return Objects.equals(teamOne, that.teamOne) &&
+        return newTurn == that.newTurn &&
+                Objects.equals(teamOne, that.teamOne) &&
                 Objects.equals(teamTwo, that.teamTwo) &&
                 Objects.equals(activeWords, that.activeWords) &&
                 Objects.equals(guessedWords, that.guessedWords) &&
                 Objects.equals(currentWord, that.currentWord) &&
-                Objects.equals(currentPlayer, that.currentPlayer) &&
-                Objects.equals(teamOnePreviousPlayer, that.teamOnePreviousPlayer) &&
-                Objects.equals(teamTwoPreviousPlayer, that.teamTwoPreviousPlayer);
+                Objects.equals(currentPlayer, that.currentPlayer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(teamOne, teamTwo, activeWords, guessedWords, currentWord, currentPlayer, teamOnePreviousPlayer, teamTwoPreviousPlayer);
+        return Objects.hash(teamOne, teamTwo, activeWords, guessedWords, currentWord, currentPlayer, newTurn);
     }
 }

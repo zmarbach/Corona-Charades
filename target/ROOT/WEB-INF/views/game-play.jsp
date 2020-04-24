@@ -2,6 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<head>
+    <meta http-equiv="refresh" content="5">
+</head>
+<link href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
   <body>
       <div>
           <table>
@@ -22,10 +26,13 @@
             </form>
 
           <br />
-
-          <c:if test="${!gamePlayViewForm.isBeginningOfNewTurn}" >
-            <h1>${gamePlayViewForm.currentWord}</h1>
-          </c:if>
+          <div class="card">
+              <div class="card-body">
+                  <c:if test="${!gamePlayViewForm.newTurn}" >
+                    <h1>${gamePlayViewForm.currentWord}</h1>
+                  </c:if>
+              </div>
+          </div>
 
           <c:if test="${empty gamePlayViewForm.activeWords}">
                 <h3>All words have been guessed. Click next round to continue.</h3>
@@ -33,10 +40,10 @@
           <br />
 
           <form action="/correct" method="post">
-                <input type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Correct!" />
+                <input class="btn btn-success" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Correct!" />
           </form>
           <form action="/skip" method="post">
-                <input type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Skip" />
+                <input class="btn btn-danger" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Skip" />
           </form>
 
           <br />
