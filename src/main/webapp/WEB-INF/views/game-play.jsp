@@ -22,14 +22,16 @@
           <br />
 
             <form action="/start-turn" method="post">
-                <input type="submit" value="Start turn" />
+                <input type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Start turn" />
             </form>
 
           <br />
           <div class="card">
               <div class="card-body">
-                  <c:if test="${!gamePlayViewForm.newTurn}" >
+                  <c:if test="${!gamePlayViewForm.newTurn}">
+                    <c:if test= "${not empty gamePlayViewForm.activeWords}">
                     <h1>${gamePlayViewForm.currentWord}</h1>
+                    </c:if>
                   </c:if>
               </div>
           </div>
@@ -40,10 +42,14 @@
           <br />
 
           <form action="/correct" method="post">
-                <input class="btn btn-success" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Correct!" />
+                <c:if test="${!gamePlayViewForm.newTurn}">
+                    <input class="btn btn-success" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Correct!" />
+                </c:if>
           </form>
           <form action="/skip" method="post">
-                <input class="btn btn-danger" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Skip" />
+                <c:if test="${!gamePlayViewForm.newTurn}">
+                    <input class="btn btn-danger" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Skip" />
+                </c:if>
           </form>
 
           <br />
@@ -51,10 +57,14 @@
           <br />
 
           <form action="/next-player" method="post">
-                <input type="submit" value="Next Player" />
+            <c:if test="${!gamePlayViewForm.newTurn}" >
+              <input type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Next Player" />
+            </c:if>
           </form>
           <form action="/next-round" method="post">
+            <c:if test="${empty gamePlayViewForm.activeWords}" >
                 <input type="submit" value="Next Round" />
+            </c:if>
           </form>
 
           <br />

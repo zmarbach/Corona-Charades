@@ -6,15 +6,15 @@
       <div class="container">
       <div class="card">
         <div class="card-body">
-            <form:form action="/teams" method="POST" modelAttribute="teamPlayerNumbers">
+            <form:form action="/teams" method="POST" modelAttribute="teamPlayerNumbers" autocomplete="off">
                 <div class="form-group">
-                    <form:label for="numPlayersTeamOne" path="numPlayersTeamOne">How many players on Team One?</form:label>
-                    <form:input id="numPlayersTeamOne" class="form-control" type="text" path="numPlayersTeamOne"/>
+                    <label for="numPlayersTeamOne">How many players on Team One?</label>
+                    <input id="numPlayersTeamOne" class="form-control" type="text" name="numPlayersTeamOne" autofocus="autofocus" placeholder="0"/>
                 </div>
 
                 <div class="form-group">
-                    <form:label for="numPlayersTeamTwo" path="numPlayersTeamTwo">How many players on Team Two?</form:label>
-                    <form:input id="numPlayersTeamTwo" class="form-control" type="text" path="numPlayersTeamTwo"/>
+                    <label for="numPlayersTeamTwo">How many players on Team Two?</label>
+                    <input id="numPlayersTeamTwo" class="form-control" type="text" name="numPlayersTeamTwo" placeholder="0"/>
                 </div>
 
                 <input class="btn btn-outline-primary" type="submit" value="Submit" />

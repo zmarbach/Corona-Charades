@@ -9,10 +9,10 @@
               <h3 class="card-header">Edit Team One Player Names</h3>
               <div class="card-body">
                 <div class="card-text">
-                  <form:form action="/player-names-team-one" method="POST" modelAttribute="playerForm">
+                  <form:form action="/player-names-team-one" method="POST" modelAttribute="playerForm" autocomplete="off">
                         <c:forEach items="${playerForm.players}" var="player" varStatus="status">
                               <div class="form-group">
-                                <input class="form-control" name="players[${status.index}].name" placeholder="${player.name}"/>
+                                <input class="form-control" name="players[${status.index}].name" placeholder="${player.name}" autofocus="autofocus"/>
                               </div>
                           </c:forEach>
                         <input class="btn btn-outline-primary" type="submit" value="Save Names!" />
