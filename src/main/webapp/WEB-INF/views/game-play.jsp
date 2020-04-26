@@ -7,26 +7,41 @@
 </head>
 <link href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
   <body>
-      <div>
-          <table>
-            <tr>
-                <td>Current player: ${gamePlayViewForm.currentPlayer.name}</td>
-                <td>Current team: ${gamePlayViewForm.currentPlayer.team.name}</td>
-            </tr>
-            <tr>
-                <td>Team One score: ${gamePlayViewForm.teamOneScore}</td>
-                <td>Team Two score: ${gamePlayViewForm.teamTwoScore}</td>
-            </tr>
-          </table>
-
-          <br />
+      <div class="container">
+        <div class="row">
+              <div class="col-4">
+                  <div class="card text-white text-center bg-dark m-3" style="max-width: 15rem;">
+                    <h5 class="card-header">Current Player</h5>
+                    <div class="card-body">
+                        <h6 class="card-text"> ${gamePlayViewForm.currentPlayer.name} </h6>
+                        <h6 class="card-text"> ${gamePlayViewForm.currentPlayer.team.name} </h6>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-4">
+                  <div class="card text-white text-center bg-primary m-3" style="max-width: 10rem;">
+                      <h5 class="card-header">Team One</h5>
+                      <div class="card-body">
+                          <h2 class="card-text"> ${gamePlayViewForm.teamOneScore} </h2>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-4">
+                  <div class="card text-white text-center bg-danger m-3" style="max-width: 10rem;">
+                    <h5 class="card-header">Team Two</h5>
+                    <div class="card-body">
+                        <h2 class="card-text"> ${gamePlayViewForm.teamTwoScore} </h2>
+                    </div>
+                  </div>
+              </div>
+        </div>
 
             <form action="/start-turn" method="post">
-                <input type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Start turn" />
+                <input class="btn btn-outline-primary" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Start turn" />
             </form>
 
           <br />
-          <div class="card">
+          <div class="card text-center border-dark m-3" style="max-width: 40rem;">
               <div class="card-body">
                   <c:if test="${!gamePlayViewForm.newTurn}">
                     <c:if test= "${not empty gamePlayViewForm.activeWords}">
@@ -58,12 +73,12 @@
 
           <form action="/next-player" method="post">
             <c:if test="${!gamePlayViewForm.newTurn}" >
-              <input type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Next Player" />
+              <input class="btn btn-outline-secondary" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Next Player" />
             </c:if>
           </form>
           <form action="/next-round" method="post">
             <c:if test="${empty gamePlayViewForm.activeWords}" >
-                <input type="submit" value="Next Round" />
+                <input class="btn btn-outline-secondary" type="submit" value="Next Round" />
             </c:if>
           </form>
 
@@ -72,9 +87,8 @@
           <br />
 
           <form action="/end-game" method="post">
-                <input type="submit" value="End Game" />
+                <input class="btn btn-outline-danger" type="submit" value="End Game" />
           </form>
-
       </div>
   </body>
 </html>

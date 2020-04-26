@@ -3,7 +3,7 @@ package com.aws.corona.charades.service;
 import com.aws.corona.charades.domain.GameSingleton;
 import com.aws.corona.charades.domain.Player;
 import com.aws.corona.charades.domain.Team;
-import com.aws.corona.charades.domain.TeamPlayerNumbers;
+import com.aws.corona.charades.domain.TeamsViewForm;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -24,12 +24,12 @@ public class GameSetUpService {
         }
     }
 
-    public void addWordsToGame(TeamPlayerNumbers teamPlayerNumbers) {
+    public void addWordsToGame(TeamsViewForm teamsViewForm) {
         if(!GameSingleton.getInstance().getActiveWords().isEmpty()){
             GameSingleton.getInstance().setActiveWords(new ArrayList<>());
         }
-        int totalPlayers = teamPlayerNumbers.getNumPlayersTeamOne() + teamPlayerNumbers.getNumPlayersTeamTwo();
-        int numOfWordsForGame = totalPlayers * 5;
+        int totalPlayers = teamsViewForm.getNumPlayersTeamOne() + teamsViewForm.getNumPlayersTeamTwo();
+        int numOfWordsForGame = totalPlayers * teamsViewForm.getNumWordsPerPlayer();
 
         List<String> gameWords = selectRandomWordsFromFile(numOfWordsForGame);
         GameSingleton.getInstance().getActiveWords().addAll(gameWords);

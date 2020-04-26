@@ -23,15 +23,15 @@ public class GameController {
 
     @GetMapping(value = "/teams")
     public String displayTeamsForm(Model model) {
-        model.addAttribute("teamPlayerNumbers", new TeamPlayerNumbers(0,0));
+        model.addAttribute("teamPlayerNumbers", new TeamsViewForm(0,0, 0));
         return "teams";
     }
 
     @PostMapping("/teams")
-    public String addNumberOfPlayersToTeams(@ModelAttribute("teamPlayerNumbers") TeamPlayerNumbers teamPlayerNumbers){
-        gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamOne(), GAME.getTeamOne());
-        gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamTwo(), GAME.getTeamTwo());
-        gameSetUpService.addWordsToGame(teamPlayerNumbers);
+    public String addNumberOfPlayersToTeams(@ModelAttribute("teamsViewForm") TeamsViewForm teamsViewForm){
+        gameSetUpService.addPlayersToTeam(teamsViewForm.getNumPlayersTeamOne(), GAME.getTeamOne());
+        gameSetUpService.addPlayersToTeam(teamsViewForm.getNumPlayersTeamTwo(), GAME.getTeamTwo());
+        gameSetUpService.addWordsToGame(teamsViewForm);
         return "redirect:/player-names-team-one";
     }
 
