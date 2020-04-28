@@ -1,9 +1,6 @@
 package com.aws.corona.charades.service;
 
-import com.aws.corona.charades.domain.GameSingleton;
-import com.aws.corona.charades.domain.Player;
-import com.aws.corona.charades.domain.Team;
-import com.aws.corona.charades.domain.TeamsViewForm;
+import com.aws.corona.charades.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -31,17 +28,20 @@ public class GameSetUpService {
         int totalPlayers = teamsViewForm.getNumPlayersTeamOne() + teamsViewForm.getNumPlayersTeamTwo();
         int numOfWordsForGame = totalPlayers * teamsViewForm.getNumWordsPerPlayer();
 
-        List<String> gameWords = selectRandomWordsFromFile(numOfWordsForGame);
+        CategoryMap categoryMap = new CategoryMap(new HashMap<>());
+        List<String> gameWords = selectRandomWordsFromFile(numOfWordsForGame, categoryMap.getCategoryFilePathMap().get(teamsViewForm.getSelectedCategoryName()));
         GameSingleton.getInstance().getActiveWords().addAll(gameWords);
     }
 
-    private List<String> selectRandomWordsFromFile(int numOfWordsToGet) {
+    private List<String> selectRandomWordsFromFile(int numOfWordsToGet, String filePath) {
         List<String> selectedWords = new ArrayList<>();
         try {
-            Scanner scanner = new Scanner(new File("C:\\source\\Corona-Charades\\words.txt"));
+            InputStream in = getClass().getResourceAsStream(filePath);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             List<String> words = new ArrayList<>();
-            while(scanner.hasNextLine()){
-                words.add(scanner.nextLine());
+            String line;
+            while ((line = reader.readLine()) != null) {
+                words.add(line);
             }
 
             for(int i=0; i<numOfWordsToGet; i++){
@@ -62,4 +62,7 @@ public class GameSetUpService {
             return list;
         }
     }
+
+
+
 }

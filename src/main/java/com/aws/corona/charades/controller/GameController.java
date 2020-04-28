@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.lang.String;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -23,7 +27,11 @@ public class GameController {
 
     @GetMapping(value = "/teams")
     public String displayTeamsForm(Model model) {
-        model.addAttribute("teamPlayerNumbers", new TeamsViewForm(0,0, 0));
+        model.addAttribute("teamsViewForm", new TeamsViewForm(0,0, 0, "General"));
+        CategoryMap categoryMap = new CategoryMap(new HashMap<>());
+        List<String> categoryNames = new ArrayList<>();
+        categoryNames.addAll(categoryMap.getCategoryFilePathMap().keySet());
+        model.addAttribute("categoryNames", categoryNames);
         return "teams";
     }
 

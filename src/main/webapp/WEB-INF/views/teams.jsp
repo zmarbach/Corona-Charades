@@ -3,7 +3,15 @@
 <html>
 <link href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
   <body>
-      <div class="container">
+    <div class="container">
+
+      <div class="card text-center border-dark m-3">
+          <img class="card-img-top" src="/resources/corona.jpg" alt="Corona">
+          <div class="card-body">
+             <div style="font-size:100px; font-weight: bold;"> COVID-19 Charades! </div>
+          </div>
+      </div>
+
       <div class="card">
         <div class="card-body">
             <form:form action="/teams" method="POST" modelAttribute="teamsViewForm" autocomplete="off">
@@ -22,10 +30,19 @@
                     <input id="numWordsPerPlayer" class="form-control" type="text" name="numWordsPerPlayer" placeholder="0"/>
                 </div>
 
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Category: </label>
+                  </div>
+                  <form:select class="custom-select" id="inputGroupSelect01" path = "selectedCategoryName" style="max-width: 20rem;">
+                     <form:options items = "${categoryNames}" />
+                  </form:select>
+                </div>
+
                 <input class="btn btn-outline-primary" type="submit" value="Submit" />
             </form:form>
         </div>
       </div>
-      </div>
+    </div>
   </body>
 </html>

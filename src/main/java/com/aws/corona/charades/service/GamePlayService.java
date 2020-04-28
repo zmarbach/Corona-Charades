@@ -65,26 +65,6 @@ public class GamePlayService {
         } else {
             GAME.setCurrentPlayer(newTeam.getPlayers().get(prevPlayerIndex + 1));
         }
-
-//        if(currentTeam.equals(GAME.getTeamOne())){
-//            //currentPlayer should be on Team Two
-//            int indexOfTeamTwoPreviousPlayer = GAME.getTeamTwo().getPlayers().indexOf(GAME.getTeamTwoPreviousPlayer());
-//            if(currentElementIsLastElementInList(indexOfTeamTwoPreviousPlayer, GAME.getTeamTwo().getPlayers())){
-//                GAME.setCurrentPlayer(GAME.getTeamTwo().getPlayers().get(0));
-//            }
-//            else{
-//                GAME.setCurrentPlayer(GAME.getTeamTwo().getPlayers().get(indexOfTeamTwoPreviousPlayer + 1));
-//            }
-//        }
-//        else {
-//            //otherwise currentPlayer should be Team One
-//            int indexOfTeamOnePreviousPlayer = GAME.getTeamOne().getPlayers().indexOf(GAME.getTeamOnePreviousPlayer());
-//            if (currentElementIsLastElementInList(indexOfTeamOnePreviousPlayer, GAME.getTeamOne().getPlayers())) {
-//                GAME.setCurrentPlayer(GAME.getTeamOne().getPlayers().get(0));
-//            } else {
-//                GAME.setCurrentPlayer(GAME.getTeamOne().getPlayers().get(indexOfTeamOnePreviousPlayer + 1));
-//            }
-//        }
     }
 
     private void setCurrentTeamsPreviousPlayer(Player currentPlayer) {
@@ -124,11 +104,8 @@ public class GamePlayService {
     public void handleNextRound() {
         GAME.setActiveWords(GAME.getGuessedWords());
         GAME.setGuessedWords(new ArrayList<>());
-
         Collections.shuffle(GAME.getActiveWords());
 
-        setNewCurrentPlayer();
-
-        GAME.setNewTurn(true);
+        handleNextPlayer();
     }
 }
