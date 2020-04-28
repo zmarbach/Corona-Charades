@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.lang.String;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -23,15 +27,19 @@ public class GameController {
 
     @GetMapping(value = "/teams")
     public String displayTeamsForm(Model model) {
-        model.addAttribute("teamPlayerNumbers", new TeamPlayerNumbers(0,0));
+        model.addAttribute("teamsViewForm", new TeamsViewForm(0,0, 0, "General"));
+        CategoryMap categoryMap = new CategoryMap(new HashMap<>());
+        List<String> categoryNames = new ArrayList<>();
+        categoryNames.addAll(categoryMap.getCategoryFilePathMap().keySet());
+        model.addAttribute("categoryNames", categoryNames);
         return "teams";
     }
 
     @PostMapping("/teams")
-    public String addNumberOfPlayersToTeams(@ModelAttribute("teamPlayerNumbers") TeamPlayerNumbers teamPlayerNumbers){
-        gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamOne(), GAME.getTeamOne());
-        gameSetUpService.addPlayersToTeam(teamPlayerNumbers.getNumPlayersTeamTwo(), GAME.getTeamTwo());
-        gameSetUpService.addWordsToGame(teamPlayerNumbers);
+    public String addNumberOfPlayersToTeams(@ModelAttribute("teamsViewForm") TeamsViewForm teamsViewForm){
+        gameSetUpService.addPlayersToTeam(teamsViewForm.getNumPlayersTeamOne(), GAME.getTeamOne());
+        gameSetUpService.addPlayersToTeam(teamsViewForm.getNumPlayersTeamTwo(), GAME.getTeamTwo());
+        gameSetUpService.addWordsToGame(teamsViewForm);
         return "redirect:/player-names-team-one";
     }
 
@@ -41,8 +49,6 @@ public class GameController {
         playerForm.setPlayers(GAME.getTeamOne().getPlayers());
         model.addAttribute("playerForm", playerForm);
         model.addAttribute("activeWords", GAME.getActiveWords());
-        model.addAttribute("teamOnePlayers", GAME.getTeamOne().getPlayers());
-        model.addAttribute("teamTwoPlayers", GAME.getTeamTwo().getPlayers());
         return "player-names-team-one";
     }
 
@@ -73,8 +79,6 @@ public class GameController {
         //set player 1 from Team One as current player and Team One as current Team
         Player playerOneTeamOne = GAME.getTeamOne().getPlayers().get(0);
         GAME.setCurrentPlayer(playerOneTeamOne);
-        GAME.setCurrentTeam(GAME.getTeamOne());
-
         return "redirect:/game-play";
     }
 
@@ -85,9 +89,10 @@ public class GameController {
         GamePlayViewForm gamePlayViewForm = new GamePlayViewForm(
                 GAME.getCurrentWord(),
                 GAME.getCurrentPlayer(),
-                GAME.getCurrentTeam(),
                 GAME.getTeamOne().getScore(),
-                GAME.getTeamTwo().getScore());
+                GAME.getTeamTwo().getScore(),
+                GAME.getActiveWords(),
+                GAME.isNewTurn());
         model.addAttribute("gamePlayViewForm", gamePlayViewForm);
         return "game-play";
     }
@@ -118,7 +123,7 @@ public class GameController {
 
     @PostMapping("/next-round")
     public String nextRound(){
-        //delegate to gamePlayService method
+        gamePlayService.handleNextRound();
         //update model attributes
         return "redirect:/game-play";
     }

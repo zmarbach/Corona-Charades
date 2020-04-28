@@ -1,9 +1,6 @@
 package com.aws.corona.charades.service;
 
-import com.aws.corona.charades.domain.GameSingleton;
-import com.aws.corona.charades.domain.Player;
-import com.aws.corona.charades.domain.Team;
-import com.aws.corona.charades.domain.TeamPlayerNumbers;
+import com.aws.corona.charades.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -12,7 +9,6 @@ import java.util.*;
 @Service
 public class GameSetUpService {
 
-    private final static String WORDS_FILE_PATH = "C:\\source\\Corona-Charades\\words.txt";
     private Random r = new Random();
 
     public void addPlayersToTeam(Integer numPlayersOnTeam, Team team) {
@@ -21,36 +17,33 @@ public class GameSetUpService {
         }
         for(int i=0; i<numPlayersOnTeam; i++) {
             Integer playerNum = i + 1;
-            team.getPlayers().add(new Player("Player " + playerNum.toString()));
+            team.getPlayers().add(new Player("Player " + playerNum.toString(), team));
         }
     }
 
-    public void addWordsToGame(TeamPlayerNumbers teamPlayerNumbers) {
+    public void addWordsToGame(TeamsViewForm teamsViewForm) {
         if(!GameSingleton.getInstance().getActiveWords().isEmpty()){
             GameSingleton.getInstance().setActiveWords(new ArrayList<>());
         }
-        int totalPlayers = teamPlayerNumbers.getNumPlayersTeamOne() + teamPlayerNumbers.getNumPlayersTeamTwo();
-        int numOfWordsForGame = totalPlayers * 5;
+        int totalPlayers = teamsViewForm.getNumPlayersTeamOne() + teamsViewForm.getNumPlayersTeamTwo();
+        int numOfWordsForGame = totalPlayers * teamsViewForm.getNumWordsPerPlayer();
 
-        List<String> gameWords = selectRandomWordsFromFile(numOfWordsForGame);
-        gameWords.add("test1");
-        gameWords.add("test2");
-        gameWords.add("test3");
-        gameWords.add("test4");
-        gameWords.add("test5");
-        gameWords.add("test6");
+        CategoryMap categoryMap = new CategoryMap(new HashMap<>());
+        List<String> gameWords = selectRandomWordsFromFile(numOfWordsForGame, categoryMap.getCategoryFilePathMap().get(teamsViewForm.getSelectedCategoryName()));
         GameSingleton.getInstance().getActiveWords().addAll(gameWords);
     }
 
-    private List<String> selectRandomWordsFromFile(int numOfWordsToGet) {
+    private List<String> selectRandomWordsFromFile(int numOfWordsToGet, String filePath) {
+        List<String> selectedWords = new ArrayList<>();
         try {
-            Scanner scanner = new Scanner(new File("words.txt"));
+            InputStream in = getClass().getResourceAsStream(filePath);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             List<String> words = new ArrayList<>();
-            while(scanner.hasNextLine()){
-                words.add(scanner.nextLine());
+            String line;
+            while ((line = reader.readLine()) != null) {
+                words.add(line);
             }
 
-            List<String> selectedWords = new ArrayList<>();
             for(int i=0; i<numOfWordsToGet; i++){
                 String selectedWord = words.get(r.nextInt(words.size()));
                 selectedWords.add(selectedWord);
@@ -61,8 +54,15 @@ public class GameSetUpService {
         catch (FileNotFoundException e){
             System.out.println("File not found");
             List<String> list = new ArrayList<>();
-            list.add("FILENOTFOUND - " + e.getMessage());
+            list.add("FileNotFound - " + e.getMessage());
+            return list;
+        } catch (IOException e) {
+            List<String> list = new ArrayList<>();
+            list.add("IOException - " + e.getMessage());
+            return list;
         }
-        return new ArrayList<>();
     }
+
+
+
 }

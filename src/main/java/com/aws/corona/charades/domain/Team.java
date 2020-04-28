@@ -10,11 +10,13 @@ public class Team {
     private String name;
     private List<Player> players;
     private Integer score;
+    private Player previousPlayer;
 
-    public Team(String name, List<Player> players, Integer score) {
+    public Team(String name, List<Player> players, Integer score, Player previousPlayer) {
         this.name = name;
         this.players = players;
         this.score = score;
+        this.previousPlayer = previousPlayer;
     }
 
     public String getName() {
@@ -39,6 +41,14 @@ public class Team {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    public Player getPreviousPlayer() {
+        return previousPlayer;
+    }
+
+    public void setPreviousPlayer(Player previousPlayer) {
+        this.previousPlayer = previousPlayer;
     }
 
     @Override
