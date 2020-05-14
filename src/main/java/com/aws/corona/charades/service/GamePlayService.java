@@ -1,6 +1,6 @@
 package com.aws.corona.charades.service;
 
-import com.aws.corona.charades.domain.GameSingleton;
+import com.aws.corona.charades.domain.Game;
 import com.aws.corona.charades.domain.Player;
 import com.aws.corona.charades.domain.Team;
 import org.springframework.stereotype.Service;
@@ -12,58 +12,61 @@ import java.util.Random;
 
 @Service
 public class GamePlayService {
-    private static GameSingleton GAME = GameSingleton.getInstance();
     private Random r = new Random();
+    private GameService gameService;
 
-    public void handleStartTurn(){
-        List<String> activeWords = GAME.getActiveWords();
-        String randomWord = activeWords.get(r.nextInt(activeWords.size()));
-        GAME.setCurrentWord(randomWord);
-        GAME.setNewTurn(false);
+    public GamePlayService(GameService gameService) {
+        this.gameService = gameService;
     }
 
-    public void handleCorrect() {
-        String correctlyGuessedWord = GAME.getCurrentWord();
-        int currentWordIndex = determineCurrentWordIndex();
+    public void handleStartTurn(Game game){
+        List<String> activeWords = game.getActiveWords();
+        String randomWord = activeWords.get(r.nextInt(activeWords.size()));
+        game.setCurrentWord(randomWord);
+        game.setNewTurn(false);
+
+    }
+
+    public void handleCorrect(Game game) {
+        String correctlyGuessedWord = game.getCurrentWord();
+        int currentWordIndex = determineCurrentWordIndex(game);
 
         //if more than one word left
-        if(GAME.getActiveWords().size() > 1){
-            GAME.setCurrentWord(determineNextWord(currentWordIndex));
+        if(game.getActiveWords().size() > 1){
+            game.setCurrentWord(determineNextWord(currentWordIndex, game));
         }
-        GAME.getActiveWords().remove(correctlyGuessedWord);
-        GAME.getGuessedWords().add(correctlyGuessedWord);
+        game.getActiveWords().remove(correctlyGuessedWord);
+        game.getGuessedWords().add(correctlyGuessedWord);
 
-        incrementCurrentTeamScore();
+        incrementCurrentTeamScore(game);
+        gameService.updateGame(game);
     }
 
-    public void handleSkip() {
-        int currentWordIndex = determineCurrentWordIndex();
-        GAME.setCurrentWord(determineNextWord(currentWordIndex));
+    public void handleSkip(Game game) {
+        int currentWordIndex = determineCurrentWordIndex(game);
+        game.setCurrentWord(determineNextWord(currentWordIndex, game));
+        gameService.updateGame(game);
     }
 
-    public void handleNextPlayer() {
-        setCurrentTeamsPreviousPlayer(GAME.getCurrentPlayer());
-        setNewCurrentPlayer();
-        GAME.setNewTurn(true);
-    }
 
-    private void setNewCurrentPlayer() {
-        Team currentTeam = GAME.getCurrentPlayer().getTeam();
+
+    private void setNewCurrentPlayer(Game game) {
+        Team currentTeam = game.getCurrentPlayer().getTeam();
         Team newTeam;
         //switch teams
-        if(currentTeam.equals(GAME.getTeamOne())){
-            newTeam = GAME.getTeamTwo();
+        if(currentTeam.equals(game.getTeamOne())){
+            newTeam = game.getTeamTwo();
         }
         else{
-            newTeam = GAME.getTeamOne();
+            newTeam = game.getTeamOne();
         }
 
         //set currentPlayer based on new team and previousPlayer
         int prevPlayerIndex = newTeam.getPlayers().indexOf(newTeam.getPreviousPlayer());
         if (currentElementIsLastElementInList(prevPlayerIndex, newTeam.getPlayers())) {
-            GAME.setCurrentPlayer(newTeam.getPlayers().get(0));
+            game.setCurrentPlayer(newTeam.getPlayers().get(0));
         } else {
-            GAME.setCurrentPlayer(newTeam.getPlayers().get(prevPlayerIndex + 1));
+            game.setCurrentPlayer(newTeam.getPlayers().get(prevPlayerIndex + 1));
         }
     }
 
@@ -71,20 +74,21 @@ public class GamePlayService {
         currentPlayer.getTeam().setPreviousPlayer(currentPlayer);
     }
 
-    private void incrementCurrentTeamScore() {
-        Team currentTeam = GAME.getCurrentPlayer().getTeam();
+    private void incrementCurrentTeamScore(Game game) {
+        Team currentTeam = game.getCurrentPlayer().getTeam();
         currentTeam.setScore(currentTeam.getScore() + 1);
     }
 
-    private int determineCurrentWordIndex(){
-        return GAME.getActiveWords().indexOf(GAME.getCurrentWord());
+    private int determineCurrentWordIndex(Game game){
+        return game.getActiveWords().indexOf(game.getCurrentWord());
     }
-    private String determineNextWord(int currentWordIndex) {
-        if(currentElementIsLastElementInList(currentWordIndex, GAME.getActiveWords())){
-            return GAME.getActiveWords().get(0);
+
+    private String determineNextWord(int currentWordIndex, Game game) {
+        if(currentElementIsLastElementInList(currentWordIndex, game.getActiveWords())){
+            return game.getActiveWords().get(0);
         }
         else{
-            return GAME.getActiveWords().get(currentWordIndex + 1);
+            return game.getActiveWords().get(currentWordIndex + 1);
         }
     }
 
@@ -92,20 +96,23 @@ public class GamePlayService {
         return elementIndex == list.size() - 1;
     }
 
-    public void handleEndGame() {
-        GAME.setTeamOne(new Team("Team One", new ArrayList<>(), 0, new Player()));
-        GAME.setTeamTwo(new Team("Team Two", new ArrayList<>(), 0, new Player()));
-        GAME.setActiveWords(new ArrayList<>());
-        GAME.setGuessedWords(new ArrayList<>());
-        GAME.setCurrentWord("SAMPLE WORD");
-        GAME.setCurrentPlayer(new Player("DEREK JETER", new Team("", new ArrayList<>(), 0, new Player())));
+    public void handleEndGame(Game game) {
+        gameService.deleteGame(game);
     }
 
-    public void handleNextRound() {
-        GAME.setActiveWords(GAME.getGuessedWords());
-        GAME.setGuessedWords(new ArrayList<>());
-        Collections.shuffle(GAME.getActiveWords());
+    public void handleNextRound(Game game) {
+        game.setActiveWords(game.getGuessedWords());
+        game.setGuessedWords(new ArrayList<>());
+        Collections.shuffle(game.getActiveWords());
 
-        handleNextPlayer();
+        handleNextPlayer(game);
+        gameService.updateGame(game);
+    }
+
+    public void handleNextPlayer(Game game) {
+        setCurrentTeamsPreviousPlayer(game.getCurrentPlayer());
+        setNewCurrentPlayer(game);
+        game.setNewTurn(true);
+        gameService.updateGame(game);
     }
 }

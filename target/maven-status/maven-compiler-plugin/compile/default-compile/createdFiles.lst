@@ -1,8 +1,10 @@
-com\aws\corona\charades\domain\GameSingleton.class
 com\aws\corona\charades\domain\Team.class
 com\aws\corona\charades\service\GamePlayService.class
+com\aws\corona\charades\domain\Game.class
+com\aws\corona\charades\repositories\GameRepository.class
 com\aws\corona\charades\configuration\MvcConfig.class
 com\aws\corona\charades\domain\GamePlayViewForm.class
+com\aws\corona\charades\service\GameService.class
 com\aws\corona\charades\service\GameSetUpService.class
 com\aws\corona\charades\domain\Player.class
 com\aws\corona\charades\controller\GameController.class

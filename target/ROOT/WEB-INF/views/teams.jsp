@@ -1,17 +1,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <link href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
   <body>
-    <div class="container">
-
-      <div class="card text-center border-dark m-3">
-          <img class="card-img-top" src="/resources/corona.jpg" alt="Corona">
-          <div class="card-body">
-             <div style="font-size:100px; font-weight: bold;"> COVID-19 Charades! </div>
-          </div>
-      </div>
-
+    <div class="container mt-3">
       <div class="card">
         <div class="card-body">
             <form:form action="/teams" method="POST" modelAttribute="teamsViewForm" autocomplete="off">
@@ -19,6 +12,10 @@
                     <label for="numPlayersTeamOne">How many players on Team One?</label>
                     <input id="numPlayersTeamOne" class="form-control" type="text" name="numPlayersTeamOne" autofocus="autofocus" placeholder="0"/>
                 </div>
+
+                <div class="form-group">
+                    <input type="hidden" class="form-control" id="gameUUID" name="gameUUID" value="${teamsViewForm.gameUUID}" />
+                <div>
 
                 <div class="form-group">
                     <label for="numPlayersTeamTwo">How many players on Team Two?</label>

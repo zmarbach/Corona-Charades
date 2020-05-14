@@ -10,10 +10,19 @@ import java.util.*;
 public class GameSetUpService {
     private CategoryMap categoryMap;
     private Random random;
+    private GameService gameService;
 
-    public GameSetUpService(CategoryMap categoryMap, Random random) {
+    public GameSetUpService(CategoryMap categoryMap, Random random, GameService gameService) {
         this.categoryMap = categoryMap;
         this.random = random;
+        this.gameService = gameService;
+    }
+
+    public void setUpGame(TeamsViewForm teamsViewForm, Game game) {
+        addPlayersToTeam(teamsViewForm.getNumPlayersTeamOne(), game.getTeamOne());
+        addPlayersToTeam(teamsViewForm.getNumPlayersTeamTwo(), game.getTeamTwo());
+        addWordsToGame(teamsViewForm, game);
+        gameService.updateGame(game);
     }
 
     public void addPlayersToTeam(Integer numPlayersOnTeam, Team team) {
@@ -26,15 +35,15 @@ public class GameSetUpService {
         }
     }
 
-    public void addWordsToGame(TeamsViewForm teamsViewForm) {
-        if(!GameSingleton.getInstance().getActiveWords().isEmpty()){
-            GameSingleton.getInstance().setActiveWords(new ArrayList<>());
+    public void addWordsToGame(TeamsViewForm teamsViewForm, Game game) {
+        if(!game.getActiveWords().isEmpty()){
+            game.setActiveWords(new ArrayList<>());
         }
         int totalPlayers = teamsViewForm.getNumPlayersTeamOne() + teamsViewForm.getNumPlayersTeamTwo();
         int numOfWordsForGame = totalPlayers * teamsViewForm.getNumWordsPerPlayer();
 
         List<String> gameWords = selectRandomWordsFromFile(numOfWordsForGame, categoryMap.getCategoryFilePathMap().get(teamsViewForm.getSelectedCategoryName()));
-        GameSingleton.getInstance().getActiveWords().addAll(gameWords);
+        game.getActiveWords().addAll(gameWords);
     }
 
     private List<String> selectRandomWordsFromFile(int numOfWordsToGet, String filePath) {

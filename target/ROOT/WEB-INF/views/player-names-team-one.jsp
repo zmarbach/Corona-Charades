@@ -4,9 +4,9 @@
 <html>
 <link href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
   <body>
-      <div class="container">
+      <div class="container mt-3">
           <div class="card">
-              <h3 class="card-header">Edit Team One Player Names</h3>
+              <h3 class="card-header">Team One Player Names</h3>
               <div class="card-body">
                 <div class="card-text">
                   <form:form action="/player-names-team-one" method="POST" modelAttribute="playerForm" autocomplete="off">
@@ -14,7 +14,10 @@
                               <div class="form-group">
                                 <input class="form-control" name="players[${status.index}].name" placeholder="${player.name}" autofocus="autofocus"/>
                               </div>
-                          </c:forEach>
+                        </c:forEach>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="gameUUID" name="gameUUID" value="${playerForm.gameUUID}" />
+                        <div>
                         <input class="btn btn-outline-primary" type="submit" value="Save Names!" />
                   </form:form>
                 </div>
