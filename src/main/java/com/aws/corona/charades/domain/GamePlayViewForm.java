@@ -3,9 +3,11 @@ package com.aws.corona.charades.domain;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class GamePlayViewForm {
+    private UUID gameUUID;
     private String currentWord;
     private Player currentPlayer;
     private Integer teamOneScore;
@@ -16,13 +18,18 @@ public class GamePlayViewForm {
     public GamePlayViewForm() {
     }
 
-    public GamePlayViewForm(String currentWord, Player currentPlayer, Integer teamOneScore, Integer teamTwoScore, List<String> activeWords, boolean isNewTurn) {
+    public GamePlayViewForm(UUID gameUUID, String currentWord, Player currentPlayer, Integer teamOneScore, Integer teamTwoScore, List<String> activeWords, boolean isNewTurn) {
+        this.gameUUID = gameUUID;
         this.currentWord = currentWord;
         this.currentPlayer = currentPlayer;
         this.teamOneScore = teamOneScore;
         this.teamTwoScore = teamTwoScore;
         this.activeWords = activeWords;
         this.newTurn = isNewTurn;
+    }
+
+    public UUID getGameUUID() {
+        return gameUUID;
     }
 
     public String getCurrentWord() {

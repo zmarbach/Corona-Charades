@@ -7,7 +7,7 @@
 </head>
 <link href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
   <body>
-      <div class="container">
+      <div class="container mt-3">
         <div class="row">
               <div class="col-4">
                   <div class="card text-white text-center bg-dark m-3" style="height: 10rem; width: 12rem;">
@@ -36,11 +36,14 @@
               </div>
         </div>
 
-            <form action="/start-turn" method="post">
-                <c:if test="${gamePlayViewForm.newTurn}">
-                    <input class="btn btn-lg btn-outline-primary m-3" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Start turn" />
-                </c:if>
-            </form>
+        <form:form action="/start-turn" method="POST">
+            <input type="hidden" name="gameUUID" value="${gamePlayViewForm.gameUUID}" />
+
+            <c:if test="${gamePlayViewForm.newTurn}">
+                <input class="btn btn-lg btn-outline-primary m-3" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Start turn" />
+            </c:if>
+
+        </form:form>
 
           <div class="card text-center border-dark m-3" style="max-width: 40rem;">
               <div class="card-body">
@@ -59,6 +62,7 @@
           <div class="row">
               <div class="col-6">
                   <form action="/correct" method="post">
+                  <input type="hidden" name="gameUUID" value="${gamePlayViewForm.gameUUID}" />
                         <c:if test="${!gamePlayViewForm.newTurn}">
                             <input class="btn btn-lg btn-success m-3" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Correct!" />
                         </c:if>
@@ -66,6 +70,7 @@
               </div>
               <div class="col-6">
                   <form action="/skip" method="post">
+                  <input type="hidden" name="gameUUID" value="${gamePlayViewForm.gameUUID}" />
                         <c:if test="${!gamePlayViewForm.newTurn}">
                             <input class="btn btn-lg btn-danger m-3" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Skip" />
                         </c:if>
@@ -74,18 +79,21 @@
           </div>
 
           <form action="/next-player" method="post">
+            <input type="hidden" name="gameUUID" value="${gamePlayViewForm.gameUUID}" />
             <c:if test="${!gamePlayViewForm.newTurn}" >
               <input class="btn btn-lg btn-outline-secondary m-3" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Next Player" />
             </c:if>
           </form>
           <form action="/next-round" method="post">
+            <input type="hidden" name="gameUUID" value="${gamePlayViewForm.gameUUID}" />
             <c:if test="${empty gamePlayViewForm.activeWords}" >
                 <input class="btn btn-lg btn-outline-secondary m-3" type="submit" value="Next Round" />
             </c:if>
           </form>
 
           <form action="/end-game" method="post">
-                <input class="btn btn-lg btn-outline-danger m-3" type="submit" value="End Game" />
+            <input type="hidden" name="gameUUID" value="${gamePlayViewForm.gameUUID}" />
+            <input class="btn btn-lg btn-outline-danger m-3" type="submit" value="End Game" />
           </form>
       </div>
   </body>
