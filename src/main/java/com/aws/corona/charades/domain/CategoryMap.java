@@ -1,7 +1,10 @@
 package com.aws.corona.charades.domain;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Map;
 
+@Component
 public class CategoryMap {
     private Map<String, String> categoryFilePathMap;
 

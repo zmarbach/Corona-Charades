@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
+    <meta http-equiv="refresh" content="3">
 </head>
 <link href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
   <body>
@@ -37,7 +37,9 @@
         </div>
 
             <form action="/start-turn" method="post">
-                <input class="btn btn-lg btn-outline-primary m-3" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Start turn" />
+                <c:if test="${gamePlayViewForm.newTurn}">
+                    <input class="btn btn-lg btn-outline-primary m-3" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Start turn" />
+                </c:if>
             </form>
 
           <div class="card text-center border-dark m-3" style="max-width: 40rem;">
@@ -51,7 +53,7 @@
           </div>
 
           <c:if test="${empty gamePlayViewForm.activeWords}">
-                <h6>All words have been guessed. Click next round to continue.</h6>
+                <h6 style="color: red; font-style: italic;">All words have been guessed. Click next round to continue.</h6>
             </c:if>
 
           <div class="row">
