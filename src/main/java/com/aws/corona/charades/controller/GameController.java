@@ -11,18 +11,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.lang.String;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 @Controller
 public class GameController {
 
-    private GameSetUpService gameSetUpService = new GameSetUpService();
-    private GamePlayService gamePlayService = new GamePlayService();
+    private GameSetUpService gameSetUpService;
+    private GamePlayService gamePlayService;
     private static final GameSingleton GAME = GameSingleton.getInstance();
 
-    public GameController() {
+    public GameController(GameSetUpService gameSetUpService, GamePlayService gamePlayService) {
+        this.gameSetUpService = gameSetUpService;
+        this.gamePlayService = gamePlayService;
     }
 
     @GetMapping(value = "/teams")

@@ -8,8 +8,13 @@ import java.util.*;
 
 @Service
 public class GameSetUpService {
+    private CategoryMap categoryMap;
+    private Random random;
 
-    private Random r = new Random();
+    public GameSetUpService(CategoryMap categoryMap, Random random) {
+        this.categoryMap = categoryMap;
+        this.random = random;
+    }
 
     public void addPlayersToTeam(Integer numPlayersOnTeam, Team team) {
         if(!team.getPlayers().isEmpty()){
@@ -28,7 +33,6 @@ public class GameSetUpService {
         int totalPlayers = teamsViewForm.getNumPlayersTeamOne() + teamsViewForm.getNumPlayersTeamTwo();
         int numOfWordsForGame = totalPlayers * teamsViewForm.getNumWordsPerPlayer();
 
-        CategoryMap categoryMap = new CategoryMap(new HashMap<>());
         List<String> gameWords = selectRandomWordsFromFile(numOfWordsForGame, categoryMap.getCategoryFilePathMap().get(teamsViewForm.getSelectedCategoryName()));
         GameSingleton.getInstance().getActiveWords().addAll(gameWords);
     }
@@ -45,7 +49,7 @@ public class GameSetUpService {
             }
 
             for(int i=0; i<numOfWordsToGet; i++){
-                String selectedWord = words.get(r.nextInt(words.size()));
+                String selectedWord = words.get(random.nextInt(words.size()));
                 selectedWords.add(selectedWord);
                 words.remove(selectedWord);
             }
@@ -62,7 +66,4 @@ public class GameSetUpService {
             return list;
         }
     }
-
-
-
 }
