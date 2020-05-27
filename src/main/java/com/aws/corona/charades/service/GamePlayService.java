@@ -48,7 +48,25 @@ public class GamePlayService {
         gameService.updateGame(game);
     }
 
+    public void handleNextPlayer(Game game) {
+        setCurrentTeamsPreviousPlayer(game.getCurrentPlayer());
+        setNewCurrentPlayer(game);
+        game.setNewTurn(true);
+        gameService.updateGame(game);
+    }
 
+    public void handleNextRound(Game game) {
+        game.setActiveWords(game.getGuessedWords());
+        game.setGuessedWords(new ArrayList<>());
+        Collections.shuffle(game.getActiveWords());
+
+        handleNextPlayer(game);
+        gameService.updateGame(game);
+    }
+
+    public void handleEndGame(Game game) {
+        gameService.deleteGame(game);
+    }
 
     private void setNewCurrentPlayer(Game game) {
         Team currentTeam = game.getCurrentPlayer().getTeam();
@@ -92,27 +110,7 @@ public class GamePlayService {
         }
     }
 
-    public boolean currentElementIsLastElementInList(int elementIndex, List list){
+    private boolean currentElementIsLastElementInList(int elementIndex, List list){
         return elementIndex == list.size() - 1;
-    }
-
-    public void handleEndGame(Game game) {
-        gameService.deleteGame(game);
-    }
-
-    public void handleNextRound(Game game) {
-        game.setActiveWords(game.getGuessedWords());
-        game.setGuessedWords(new ArrayList<>());
-        Collections.shuffle(game.getActiveWords());
-
-        handleNextPlayer(game);
-        gameService.updateGame(game);
-    }
-
-    public void handleNextPlayer(Game game) {
-        setCurrentTeamsPreviousPlayer(game.getCurrentPlayer());
-        setNewCurrentPlayer(game);
-        game.setNewTurn(true);
-        gameService.updateGame(game);
     }
 }

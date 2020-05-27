@@ -19,7 +19,6 @@ public class Game {
     private boolean newTurn;
 
     public Game(UUID uuid) {
-        this.uuid = uuid;
         this.teamOne = new Team("Team One", new ArrayList<>(), 0, new Player());
         this.teamTwo = new Team("Team Two", new ArrayList<>(), 0, new Player());
         this.activeWords = new ArrayList<>();
@@ -27,6 +26,70 @@ public class Game {
         this.currentWord = "";
         this.currentPlayer = new Player("DEREK JETER", new Team("", new ArrayList<>(), 0, new Player()));
         this.newTurn = true;
+    }
+
+    public static class GameBuilder{
+        UUID uuid = null;
+        Team teamOne = new Team();
+        Team teamTwo = new Team();
+        List<String> activeWords = new ArrayList<>();
+        List<String> guessedWords = new ArrayList<>();
+        String currentWord = "";
+        Player currentPlayer = new Player();
+        boolean newTurn = false;
+
+        public GameBuilder withUUID(UUID uuid){
+            this.uuid = uuid;
+            return this;
+        }
+
+        public GameBuilder withTeamOne(Team teamOne){
+            this.teamOne = teamOne;
+            return this;
+        }
+
+        public GameBuilder withTeamTwo(Team teamTwo){
+            this.teamTwo = teamTwo;
+            return this;
+        }
+
+        public GameBuilder withActiveWords(List<String> activeWords){
+            this.activeWords = activeWords;
+            return this;
+        }
+
+        public GameBuilder withGuessedWords(List<String> guessedWords){
+            this.guessedWords = guessedWords;
+            return this;
+        }
+
+        public GameBuilder withCurrentWord(String currentWord){
+            this.currentWord = currentWord;
+            return this;
+        }
+
+        public GameBuilder withCurrentPlayer(Player currentPlayer){
+            this.currentPlayer = currentPlayer;
+            return this;
+        }
+
+        public GameBuilder isNewTurn(boolean newTurn){
+            this.newTurn = newTurn;
+            return this;
+        }
+
+        public Game build(){
+            Game game = new Game(this.uuid);
+            game.setTeamOne(this.teamOne);
+            game.setTeamTwo(this.teamTwo);
+            game.setActiveWords(this.activeWords);
+            game.setGuessedWords(this.guessedWords);
+            game.setCurrentWord(this.currentWord);
+            game.setCurrentPlayer(this.currentPlayer);
+            game.setNewTurn(this.newTurn);
+
+            return game;
+        }
     }
 
     public UUID getUuid() {
