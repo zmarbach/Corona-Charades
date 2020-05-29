@@ -25,7 +25,7 @@ public class GameSetUpService {
         gameService.updateGame(game);
     }
 
-    public void addPlayersToTeam(Integer numPlayersOnTeam, Team team) {
+    private void addPlayersToTeam(Integer numPlayersOnTeam, Team team) {
         if(!team.getPlayers().isEmpty()){
             team.setPlayers(new ArrayList<>());
         }
@@ -35,7 +35,7 @@ public class GameSetUpService {
         }
     }
 
-    public void addWordsToGame(TeamsViewForm teamsViewForm, Game game) {
+    private void addWordsToGame(TeamsViewForm teamsViewForm, Game game) {
         if(!game.getActiveWords().isEmpty()){
             game.setActiveWords(new ArrayList<>());
         }

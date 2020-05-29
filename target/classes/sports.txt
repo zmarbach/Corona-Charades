@@ -153,6 +153,5 @@ uniform
 volleyball
 wakeboarding
 weightlifter
-white water rafting
 World Cup
 World Series

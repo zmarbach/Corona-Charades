@@ -12,6 +12,9 @@ public class Team {
     private Integer score;
     private Player previousPlayer;
 
+    public Team(){
+    }
+
     public Team(String name, List<Player> players, Integer score, Player previousPlayer) {
         this.name = name;
         this.players = players;
