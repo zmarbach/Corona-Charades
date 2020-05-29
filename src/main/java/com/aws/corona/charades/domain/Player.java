@@ -44,6 +44,6 @@ public class Player {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, team);
+        return Objects.hash(name, team.getName());
     }
 }
