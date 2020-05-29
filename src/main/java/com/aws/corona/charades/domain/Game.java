@@ -19,6 +19,7 @@ public class Game {
     private boolean newTurn;
 
     public Game(UUID uuid) {
+        this.uuid = uuid;
         this.teamOne = new Team("Team One", new ArrayList<>(), 0, new Player());
         this.teamTwo = new Team("Team Two", new ArrayList<>(), 0, new Player());
         this.activeWords = new ArrayList<>();

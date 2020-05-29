@@ -26,7 +26,6 @@ public class GameRepository {
     }
 
     public Game createNewGame(){
-
         Game game = new Game(UUID.randomUUID());
         gameMap.put(game.getUuid(), game);
         return game;
