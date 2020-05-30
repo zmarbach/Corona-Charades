@@ -8,9 +8,9 @@ import java.util.*;
 
 @Service
 public class GameSetUpService {
-    private CategoryMap categoryMap;
     private Random random;
     private GameService gameService;
+    private CategoryMap categoryMap;
 
     public GameSetUpService(CategoryMap categoryMap, Random random, GameService gameService) {
         this.categoryMap = categoryMap;

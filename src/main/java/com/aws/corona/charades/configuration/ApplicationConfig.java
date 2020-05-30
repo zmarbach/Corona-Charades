@@ -1,5 +1,6 @@
 package com.aws.corona.charades.configuration;
 
+import com.aws.corona.charades.controller.GamePlayController;
 import com.aws.corona.charades.domain.CategoryMap;
 import com.aws.corona.charades.repositories.GameRepository;
 import com.aws.corona.charades.service.GameService;
@@ -10,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-import com.aws.corona.charades.controller.GameController;
+import com.aws.corona.charades.controller.GameSetUpController;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -21,8 +22,13 @@ import java.util.Random;
 public class ApplicationConfig {
 
     @Bean
-    public GameController createGameController() {
-        return new GameController(createGameSetUpService(createCategoryMap(), new Random()), createGamePlayService(), createGameService());
+    public GameSetUpController createGameSetUpController() {
+        return new GameSetUpController(createGameSetUpService(), createGameService());
+    }
+
+    @Bean
+    public GamePlayController createGamePlayController() {
+        return new GamePlayController(createGamePlayService(), createGameService());
     }
 
     @Bean
@@ -31,13 +37,8 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public GameSetUpService createGameSetUpService(CategoryMap categoryMap, Random random){
-        return new GameSetUpService(categoryMap, random, createGameService());
-    }
-
-    @Bean
-    public CategoryMap createCategoryMap() {
-        return new CategoryMap(new HashMap<>());
+    public GameSetUpService createGameSetUpService(){
+        return new GameSetUpService(new CategoryMap(new HashMap<>()), new Random(), createGameService());
     }
 
     @Bean
