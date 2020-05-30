@@ -23,12 +23,11 @@ class GamePlayServiceTest {
 
     private GameRepository gameRepository = new GameRepository(new HashMap<>());
     private GamePlayService testObj = new GamePlayService(new GameService(gameRepository));
-    private GameObjectMother gameObjectMother = new GameObjectMother();
     private Game game;
 
     @BeforeEach
     void setUp() {
-        game = gameObjectMother.setUpGame();
+        game = GameObjectMother.setUpGame();
     }
 
     @Test

@@ -9,7 +9,6 @@ import java.util.UUID;
 @Repository
 public class GameRepository {
     private Map<UUID, Game> gameMap;
-    private UUID uuid;
 
     public GameRepository(Map<UUID, Game> gameMap) {
         this.gameMap = gameMap;

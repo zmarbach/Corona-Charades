@@ -28,15 +28,13 @@ class GameSetUpServiceTest {
     private CategoryMap categoryMap = new CategoryMap(new HashMap<>());
     private GameService gameService = new GameService(new GameRepository(new HashMap<>()));
     private GameSetUpService testObj = new GameSetUpService(categoryMap, new Random(), gameService);
-    private GameObjectMother gameObjectMother = new GameObjectMother();
-    private TeamObjectMother teamObjectMother = new TeamObjectMother();
     private Game game;
     private TeamsViewForm teamsViewForm;
 
     @BeforeEach
     void setUp() {
         UUID uuid = UUID.randomUUID();
-        game = gameObjectMother.buildGame(uuid, teamObjectMother.createTeamOne(), teamObjectMother.createTeamTwo(), new ArrayList<>(), new ArrayList<>(), "mockCurrentWord", new Player(), true);
+        game = GameObjectMother.buildGame(uuid, TeamObjectMother.createTeamOne(), TeamObjectMother.createTeamTwo(), new ArrayList<>(), new ArrayList<>(), "mockCurrentWord", new Player(), true);
         teamsViewForm = new TeamsViewForm(uuid,3,3,6, GENERAL);
     }
 

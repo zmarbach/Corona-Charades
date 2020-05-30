@@ -9,7 +9,9 @@ import java.util.List;
 @Component
 public class PlayerObjectMother {
 
-    public Player createPlayer(String playerName, Team team){
+    private PlayerObjectMother(){}
+
+    public static Player createPlayer(String playerName, Team team){
         Player player = new Player();
         player.setName(playerName);
         player.setTeam(team);
