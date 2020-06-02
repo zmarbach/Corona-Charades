@@ -2,6 +2,7 @@ C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\service\GamePlay
 C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\HelloWorldAppInitializer.java
 C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\domain\Team.java
 C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\service\GameSetUpService.java
+C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\repositories\UuidGenerator.java
 C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\configuration\MvcConfig.java
 C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\controller\GameSetUpController.java
 C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\domain\Player.java
@@ -11,6 +12,7 @@ C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\controller\GameP
 C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\repositories\GameRepository.java
 C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\service\GameService.java
 C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\domain\PlayerForm.java
+C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\repositories\UuidGeneratorImpl.java
 C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\domain\TeamsViewForm.java
 C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\domain\CategoryMap.java
 C:\source\Corona-Charades\src\main\java\com\aws\corona\charades\configuration\ApplicationConfig.java

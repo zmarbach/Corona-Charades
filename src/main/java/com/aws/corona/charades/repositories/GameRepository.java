@@ -9,9 +9,11 @@ import java.util.UUID;
 @Repository
 public class GameRepository {
     private Map<UUID, Game> gameMap;
+    private UuidGenerator uuidGenerator;
 
-    public GameRepository(Map<UUID, Game> gameMap) {
+    public GameRepository(Map<UUID, Game> gameMap, UuidGenerator uuidGenerator) {
         this.gameMap = gameMap;
+        this.uuidGenerator = uuidGenerator;
     }
 
     public Game getGame(UUID uuid) {
@@ -25,7 +27,7 @@ public class GameRepository {
     }
 
     public Game createNewGame(){
-        Game game = new Game(UUID.randomUUID());
+        Game game = new Game(uuidGenerator.generateUUID());
         gameMap.put(game.getUuid(), game);
         return game;
     }

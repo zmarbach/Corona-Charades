@@ -24,7 +24,6 @@ public class GamePlayService {
         String randomWord = activeWords.get(r.nextInt(activeWords.size()));
         game.setCurrentWord(randomWord);
         game.setNewTurn(false);
-
     }
 
     public void handleCorrect(Game game) {
