@@ -3,6 +3,7 @@ package com.aws.corona.charades.configuration;
 import com.aws.corona.charades.controller.GamePlayController;
 import com.aws.corona.charades.domain.CategoryMap;
 import com.aws.corona.charades.repositories.GameRepository;
+import com.aws.corona.charades.repositories.UuidGeneratorImpl;
 import com.aws.corona.charades.service.GameService;
 import com.aws.corona.charades.service.GamePlayService;
 import com.aws.corona.charades.service.GameSetUpService;
@@ -43,7 +44,7 @@ public class ApplicationConfig {
 
     @Bean
     public GameService createGameService(){
-        return new GameService(new GameRepository(new HashMap<>()));
+        return new GameService(new GameRepository(new HashMap<>(), new UuidGeneratorImpl()));
     }
 
 }
