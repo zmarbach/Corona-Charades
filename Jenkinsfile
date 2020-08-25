@@ -1,6 +1,9 @@
 //Jenkins build pipeline
 
     pipeline {
+        environment {
+            PROD_URL  = "https://www.google.com" // replace with correct url, maybe even set variable in K8S block
+        }
         agent any
         stages {
             stage('Build and Test Charades App') {
@@ -13,9 +16,6 @@
                     success {
                         echo "Build succeeded and all tests passed!"
                     }
-                    // failure {
-                        //do something to send email notifying about failure
-                    // }
                 }
             }
 
@@ -28,9 +28,6 @@
                     success {
                         echo "Docker image successfully built and pushed!"
                     }
-                    // failure {
-                        //do something to send email notifying about failure
-                    // }
                 }
             }
 
@@ -41,7 +38,7 @@
                 post {
                     success {
                         echo "Deployment successful. App is now running on K8S cluster in AWS"
-                        echo "Go here to see the site live in production ---> "// use env variable to concat url here
+                        echo "Go here to see the site live in production ---> $PROD_URL"
                     }
                 }
             }
