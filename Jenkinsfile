@@ -6,7 +6,7 @@
             stage('Build and Test Charades App') {
                 steps {
                     echo '***** Building charades app and running all tests.... *****'
-                    sh 'mvn -f pom.xml clean compile package'
+                    bat 'mvn -f pom.xml clean compile package'
                     //do steps to build war file
                 }
                 post {
