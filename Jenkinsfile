@@ -43,9 +43,6 @@
                         echo "Deployment successful. App is now running on K8S cluster in AWS"
                         echo "Go here to see the site live in production ---> "// use env variable to concat url here
                     }
-                    // failure {
-                        //do something to send email notifying about failure
-                    //}
                 }
             }
         }
