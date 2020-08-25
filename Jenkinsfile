@@ -33,7 +33,7 @@
 
             stage('Deploy app to K8S Cluster') {
                 steps {
-                    timeout(time: 60, unit: 'MINUTES') {
+                    timeout(time: 15, unit: 'MINUTES') {
                         input(message: "Should we deploy app to AWS?")
                     }
                     echo '***** Deploying app to K8S cluster on AWS*****'
