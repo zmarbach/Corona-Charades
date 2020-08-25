@@ -4,6 +4,7 @@ import com.aws.corona.charades.GameObjectMother;
 import com.aws.corona.charades.domain.Game;
 import com.aws.corona.charades.domain.Player;
 import com.aws.corona.charades.repositories.GameRepository;
+import com.aws.corona.charades.repositories.UuidGeneratorImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,14 +22,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GamePlayServiceTest {
 
-    private GameRepository gameRepository = new GameRepository(new HashMap<>());
+    private GameRepository gameRepository = new GameRepository(new HashMap<>(), new UuidGeneratorImpl());
     private GamePlayService testObj = new GamePlayService(new GameService(gameRepository));
-    private GameObjectMother gameObjectMother = new GameObjectMother();
     private Game game;
 
     @BeforeEach
     void setUp() {
-        game = gameObjectMother.setUpGame();
+        game = GameObjectMother.setUpGame();
     }
 
     @Test

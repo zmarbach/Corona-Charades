@@ -10,7 +10,9 @@ import java.util.List;
 @Component
 public class TeamObjectMother {
 
-    public Team createTeam(String teamName, Integer score, List<Player> players, Player prevPlayer){
+    private TeamObjectMother(){}
+
+    public static Team createTeam(String teamName, Integer score, List<Player> players, Player prevPlayer){
         Team team = new Team();
         team.setName(teamName);
         team.setScore(score);
@@ -20,10 +22,11 @@ public class TeamObjectMother {
         return team;
     }
 
-    public Team createTeamOne(){
+    public static Team createTeamOne(){
         return createTeam("Team One", 0, new ArrayList<>(), new Player());
     }
-    public Team createTeamTwo(){
+
+    public static Team createTeamTwo(){
         return createTeam("Team Two", 0, new ArrayList<>(), new Player());
     }
 }

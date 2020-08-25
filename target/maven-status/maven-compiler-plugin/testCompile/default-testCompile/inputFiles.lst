@@ -1,1 +1,9 @@
-C:\source\Corona-Charades\src\test\java\com\aws\corona\charades\controller\FilePathTest.java
+C:\source\Corona-Charades\src\test\java\com\aws\corona\charades\service\GamePlayServiceTest.java
+C:\source\Corona-Charades\src\test\java\com\aws\corona\charades\GameObjectMother.java
+C:\source\Corona-Charades\src\test\java\com\aws\corona\charades\TeamObjectMother.java
+C:\source\Corona-Charades\src\test\java\com\aws\corona\charades\PlayerObjectMother.java
+C:\source\Corona-Charades\src\test\java\com\aws\corona\charades\controller\UuidGeneratorTestImpl.java
+C:\source\Corona-Charades\src\test\java\com\aws\corona\charades\repositories\GameRepositoryTest.java
+C:\source\Corona-Charades\src\test\java\com\aws\corona\charades\service\GameSetUpServiceTest.java
+C:\source\Corona-Charades\src\test\java\com\aws\corona\charades\controller\GamePlayControllerTest.java
+C:\source\Corona-Charades\src\test\java\com\aws\corona\charades\controller\GameSetUpControllerTest.java
