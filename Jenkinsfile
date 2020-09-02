@@ -9,7 +9,7 @@
             stage('Build and Test Charades App') {
                 steps {
                     echo '***** Building charades app and running all tests.... *****'
-                    bat 'mvn -f pom.xml clean compile package'
+                    sh 'mvn -f pom.xml clean compile package'
                     //do steps to build war file
                 }
                 post {
@@ -24,11 +24,11 @@
                 steps {
                     echo '***** Building Docker image and pushing to Docker Hub *****'
                     //TODO - store image name as env variable instead
-                    bat 'docker build . -t corona-charades-app'
+                    sh 'docker build . -t corona-charades-app'
                     //TODO - find more secure way to do pass username and password in (secret?)
-                    bat 'docker login --username=zmarbach22 --password=Buggywhip22!!'
-                    bat 'docker image push zmarbach22/corona-charades-app'
-                    bat 'docker logout'
+                    sh 'docker login --username=zmarbach22 --password=Buggywhip22!!'
+                    sh 'docker image push zmarbach22/corona-charades-app'
+                    sh 'docker logout'
                 }
                 post {
                     success {
