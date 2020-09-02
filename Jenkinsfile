@@ -3,9 +3,6 @@
     pipeline {
         environment {
             PROD_URL  = "https://www.google.com" // replace with correct url, maybe even set variable in K8S block
-            docker_image_name = "corona-charades-app"
-            docker_username = "zmarbach22" //store these somewhere else and pass in for better security (secret?)
-            docker_password = "Buggywhip22!!" //store these somewhere else and pass in for better security (secret?)
         }
         agent any
         stages {
@@ -26,9 +23,11 @@
             stage('Build and Push Docker Image') {
                 steps {
                     echo '***** Building Docker image and pushing to Docker Hub *****'
-                    bat 'docker build . -t $docker_image_name'
-                    bat 'docker login --username=$docker_username --password=$docker_password'
-                    bat 'docker image push zmarbach22/$docker_image_name'
+                    //TODO - store image name as env variable instead
+                    bat 'docker build . -t corona-charades-app'
+                    //TODO - find more secure way to do pass username and password in (secret?)
+                    bat 'docker login --username=zmarbach22 --password=Buggywhip22!!'
+                    bat 'docker image push zmarbach22/corona-charades-app'
                     bat 'docker logout'
                 }
                 post {
