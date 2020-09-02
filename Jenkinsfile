@@ -24,11 +24,11 @@
                 steps {
                     echo '***** Building Docker image and pushing to Docker Hub *****'
                     //TODO - store image name as env variable instead
-                    sh 'sudo docker build . -t corona-charades-app'
+                    sh 'docker build . -t corona-charades-app'
                     //TODO - find more secure way to do pass username and password in (secret?)
-                    sh 'sudo docker login --username=zmarbach22 --password=Buggywhip22!!'
-                    sh 'sudo docker image push zmarbach22/corona-charades-app'
-                    sh 'sudo docker logout'
+                    sh 'docker login --username=zmarbach --password-stdin=Buggywhip22!!'
+                    sh 'docker image push zmarbach22/corona-charades-app'
+                    sh 'docker logout'
                 }
                 post {
                     success {
