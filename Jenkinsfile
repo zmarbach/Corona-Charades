@@ -14,6 +14,8 @@
                 post {
                     success {
                         echo "Build succeeded and all tests passed!"
+                        echo "Archive the application war file"
+                        archiveArtifacts artifacts: '**/*.war'
                     }
                 }
             }
