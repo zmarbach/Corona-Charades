@@ -27,9 +27,9 @@
                     //TODO - store image name as env variable instead
                     sh 'docker build . -t corona-charades-app'
                     //TODO - find more secure way to do pass username and password in (secret?)
-                    sh 'docker login -u zmarbach -p Buggywhip22!!'
-                    sh 'docker tag corona-charades-app zmarbach/corona-charades-app'
-                    sh 'docker image push zmarbach/corona-charades-app'
+                    sh 'docker login -u zmarbach22 -p Buggywhip22!!'
+                    sh 'docker tag corona-charades-app zmarbach22/corona-charades-app'
+                    sh 'docker image push zmarbach22/corona-charades-app'
                     sh 'docker logout'
                 }
                 post {
