@@ -27,7 +27,7 @@
                     //TODO - store image name as env variable instead
                     sh 'docker build . -t corona-charades-app'
                     //TODO - find more secure way to do pass username and password in (secret?)
-                    sh 'docker login --username=zmarbach --password-stdin=Buggywhip22!!'
+                    sh 'docker login -u zmarbach -p Buggywhip22!!'
                     sh 'docker image push zmarbach22/corona-charades-app'
                     sh 'docker logout'
                 }
