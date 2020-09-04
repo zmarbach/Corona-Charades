@@ -1,0 +1,9 @@
+com/aws/corona/charades/GameObjectMother.class
+com/aws/corona/charades/controller/GamePlayControllerTest.class
+com/aws/corona/charades/controller/GameSetUpControllerTest.class
+com/aws/corona/charades/service/GamePlayServiceTest.class
+com/aws/corona/charades/TeamObjectMother.class
+com/aws/corona/charades/repositories/GameRepositoryTest.class
+com/aws/corona/charades/PlayerObjectMother.class
+com/aws/corona/charades/controller/UuidGeneratorTestImpl.class
+com/aws/corona/charades/service/GameSetUpServiceTest.class
