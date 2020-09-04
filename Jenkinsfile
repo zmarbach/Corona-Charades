@@ -25,7 +25,7 @@
             stage('Build and Push Docker Image') {
                 steps {
                     echo '***** Building Docker image and pushing to Docker Hub *****'
-                    writeFile file: "scripts/buildAndPushDockerImage.sh", text: dockerScript
+                    sh 'chmod u+x scripts/buildAndPushDockerImage.sh'
                     sh 'scripts/buildAndPushDockerImage.sh \"corona-charades-app\" \"zmarbach22\" \"Buggywhip22!!\" '
                 }
                 post {
