@@ -5,6 +5,23 @@
 <head>
     <meta http-equiv="refresh" content="3">
 </head>
+<script>
+    const TIME_LIMIT = 30;
+    let timePassed = 0;
+    let timeLeft = TIME_LIMIT;
+    let timerInterval = null;
+
+    function startTimer() {
+          timerInterval = setInterval(() => {
+            timePassed = timePassed += 1;
+            timeLeft = TIME_LIMIT - timePassed;
+            document.getElementById("timer").innerHTML = timeLeft;
+          }, 1000);
+    }
+
+    startTimer();
+</script>
+
 <link href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
   <body>
       <div class="container mt-3">
@@ -96,5 +113,9 @@
             <input class="btn btn-lg btn-outline-danger m-3" type="submit" value="End Game" />
           </form>
       </div>
+
+      <div id="timer">
+        ${timeLeft} secs
+      <div>
   </body>
 </html>
