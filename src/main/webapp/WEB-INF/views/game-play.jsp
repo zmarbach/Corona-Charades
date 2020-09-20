@@ -87,11 +87,11 @@
               </div>
         </div>
 
-        <form:form action="/start-turn" method="POST">
+        <form:form action="/start-turn" method="POST" onsubmit="startTimer()">
             <input type="hidden" name="gameUUID" value="${gamePlayViewForm.gameUUID}" />
 
             <c:if test="${gamePlayViewForm.newTurn}">
-                <input id="startTurnButton" onclick="startTimer();" class="btn btn-lg btn-outline-primary m-3" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Start turn" />
+                <input id="startTurnButton" class="btn btn-lg btn-outline-primary m-3" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Start turn" />
             </c:if>
 
         </form:form>
@@ -129,7 +129,7 @@
               </div>
           </div>
 
-          <form action="/next-player" method="post" onsubmit="return resetTimer()">
+          <form action="/next-player" method="post" onsubmit="resetTimer()">
             <input type="hidden" name="gameUUID" value="${gamePlayViewForm.gameUUID}" />
             <c:if test="${!gamePlayViewForm.newTurn}" >
               <input id="nextPlayerButton" class="btn btn-lg btn-outline-secondary m-3" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Next Player" />
