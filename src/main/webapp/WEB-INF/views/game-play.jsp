@@ -49,19 +49,8 @@
              updateTimer(timeLeft);
          }
 
-         $(document).on('click', '[id^="startTurnButton"]', function() {
-           startTimer();
-         });
 
-         $(document).on('click', '[id^="nextPlayerButton"]', function() {
-           resetTimer();
-         });
-
-         $(document).on('click', '[id^="nextRoundButton"]', function() {
-           resetTimer();
-         });
-
-         $(document).ready(function() {
+         $(document).ready(()=> {
             updateTimer(timeLeft);
          });
     </script>
@@ -102,7 +91,7 @@
             <input type="hidden" name="gameUUID" value="${gamePlayViewForm.gameUUID}" />
 
             <c:if test="${gamePlayViewForm.newTurn}">
-                <input id="startTurnButton" class="btn btn-lg btn-outline-primary m-3" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Start turn" />
+                <input id="startTurnButton" onclick="startTimer()" class="btn btn-lg btn-outline-primary m-3" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Start turn" />
             </c:if>
 
         </form:form>
@@ -143,13 +132,13 @@
           <form action="/next-player" method="post">
             <input type="hidden" name="gameUUID" value="${gamePlayViewForm.gameUUID}" />
             <c:if test="${!gamePlayViewForm.newTurn}" >
-              <input id="nextPlayerButton" class="btn btn-lg btn-outline-secondary m-3" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Next Player" />
+              <input id="nextPlayerButton" onclick="resetTimer()" class="btn btn-lg btn-outline-secondary m-3" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Next Player" />
             </c:if>
           </form>
           <form action="/next-round" method="post">
             <input type="hidden" name="gameUUID" value="${gamePlayViewForm.gameUUID}" />
             <c:if test="${empty gamePlayViewForm.activeWords}" >
-                <input id="nextRoundButton" class="btn btn-lg btn-outline-secondary m-3" type="submit" value="Next Round" />
+                <input id="nextRoundButton" onclick="resetTimer()" class="btn btn-lg btn-outline-secondary m-3" type="submit" value="Next Round" />
             </c:if>
           </form>
 
