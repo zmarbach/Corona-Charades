@@ -2,50 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<script>
-    const TIME_LIMIT = 30;
-    let timePassed = 0;
-    let timeLeft = TIME_LIMIT;
-
-    function updateTimer(timeLeft) {
-        document.getElementById("timeLeft").innerHTML = timeLeft;
-    }
-
-    function addClassToTimerContainer(className) {
-        document.getElementById("timer-container").classList.add(className);
-    }
-
-    function removeClassFromTimerContainer(className) {
-        document.getElementById("timer-container").classList.remove(className);
-    }
-
-    function startTimer() {
-        timerInterval = setInterval(() => {
-          timePassed = timePassed += 1;
-          timeLeft = TIME_LIMIT - timePassed;
-
-          if (timeLeft <= 10) {
-            if (timeLeft <= 0) {
-              timeLeft = 0;
-              addClassToTimerContainer("blink");
-            }
-              addClassToTimerContainer("red");
-            updateTimer(timeLeft);
-          } else {
-            updateTimer(timeLeft);
-          }
-        }, 1000);
-    }
-
-    function resetTimer() {
-        clearInterval(timerInterval);
-    	timePassed = 0;
-    	timeLeft = TIME_LIMIT;
-        removeClassFromTimerContainer("red");
-        removeClassFromTimerContainer("blink");
-        updateTimer(timeLeft);
-    }
-</script>
 
 <link href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
   <body>
@@ -143,5 +99,50 @@
                 <span>secs</span>
           </div>
       </div>
+
+      <script type ="text/javascript">
+          const TIME_LIMIT = 30;
+          let timePassed = 0;
+          let timeLeft = TIME_LIMIT;
+
+          function updateTimer(timeLeft) {
+              document.getElementById("timeLeft").innerHTML = timeLeft;
+          }
+
+          function addClassToTimerContainer(className) {
+              document.getElementById("timer-container").classList.add(className);
+          }
+
+          function removeClassFromTimerContainer(className) {
+              document.getElementById("timer-container").classList.remove(className);
+          }
+
+          function startTimer() {
+              timerInterval = setInterval(() => {
+                timePassed = timePassed += 1;
+                timeLeft = TIME_LIMIT - timePassed;
+
+                if (timeLeft <= 10) {
+                  if (timeLeft <= 0) {
+                    timeLeft = 0;
+                    addClassToTimerContainer("blink");
+                  }
+                    addClassToTimerContainer("red");
+                  updateTimer(timeLeft);
+                } else {
+                  updateTimer(timeLeft);
+                }
+              }, 1000);
+          }
+
+          function resetTimer() {
+              clearInterval(timerInterval);
+          	timePassed = 0;
+          	timeLeft = TIME_LIMIT;
+              removeClassFromTimerContainer("red");
+              removeClassFromTimerContainer("blink");
+              updateTimer(timeLeft);
+          }
+      </script>
   </body>
 </html>
