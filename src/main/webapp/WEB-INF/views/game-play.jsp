@@ -45,6 +45,8 @@
         removeClassFromTimerContainer("blink");
         updateTimer(timeLeft);
     }
+    
+    updateTimer(timeLeft);
 </script>
 
 <link href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
