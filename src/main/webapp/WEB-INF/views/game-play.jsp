@@ -5,66 +5,68 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type ="text/javascript">
-        $(document).ready(function() {
-             const TIME_LIMIT = 30;
-             let timePassed = 0;
-             let timeLeft = TIME_LIMIT;
+         const TIME_LIMIT = 30;
+         let timePassed = 0;
+         let timeLeft = TIME_LIMIT;
+         let timerInterval = null;
 
-             function updateTimer(timeLeft) {
-                 document.getElementById("timeLeft").innerHTML = timeLeft;
-             }
+         function updateTimer(timeLeft) {
+            document.getElementById("timeLeft").innerHTML = timeLeft;
+         }
 
-             function addClassToTimerContainer(className) {
-                 document.getElementById("timer-container").classList.add(className);
-             }
+         function addClassToTimerContainer(className) {
+             document.getElementById("timer-container").classList.add(className);
+         }
 
-             function removeClassFromTimerContainer(className) {
-                 document.getElementById("timer-container").classList.remove(className);
-             }
+         function removeClassFromTimerContainer(className) {
+             document.getElementById("timer-container").classList.remove(className);
+         }
 
-             function startTimer() {
-                 timerInterval = setInterval(() => {
-                       timePassed = timePassed += 1;
-                       timeLeft = TIME_LIMIT - timePassed;
+         function startTimer() {
+             timerInterval = setInterval(() => {
+                   timePassed = timePassed += 1;
+                   timeLeft = TIME_LIMIT - timePassed;
 
-                       if (timeLeft <= 10) {
-                         if (timeLeft <= 0) {
-                           timeLeft = 0;
-                           addClassToTimerContainer("blink");
-                         }
-                           addClassToTimerContainer("red");
-                         updateTimer(timeLeft);
-                       } else {
-                         updateTimer(timeLeft);
-                       }
-                 }, 1000);
-             }
+                   if (timeLeft <= 10) {
+                     if (timeLeft <= 0) {
+                       timeLeft = 0;
+                       addClassToTimerContainer("blink");
+                     }
+                       addClassToTimerContainer("red");
+                     updateTimer(timeLeft);
+                   } else {
+                     updateTimer(timeLeft);
+                   }
+             }, 1000);
+         }
 
-             function resetTimer() {
-                 clearInterval(timerInterval);
-                 timePassed = 0;
-                 timeLeft = TIME_LIMIT;
-                 removeClassFromTimerContainer("red");
-                 removeClassFromTimerContainer("blink");
-                 updateTimer(timeLeft);
-             }
-
-             $(document).on('click', '[id^="startTurnButton"]', function() {
-               startTimer();
-             });
-
-             $(document).on('click', '[id^="nextPlayerButton"]', function() {
-               resetTimer();
-             });
-
-             $(document).on('click', '[id^="nextRoundButton"]', function() {
-               resetTimer();
-             });
-
+         function resetTimer() {
+             clearInterval(timerInterval);
+             timePassed = 0;
+             timeLeft = TIME_LIMIT;
+             removeClassFromTimerContainer("red");
+             removeClassFromTimerContainer("blink");
              updateTimer(timeLeft);
-        });
+         }
+
+         $(document).on('click', '[id^="startTurnButton"]', function() {
+           startTimer();
+         });
+
+         $(document).on('click', '[id^="nextPlayerButton"]', function() {
+           resetTimer();
+         });
+
+         $(document).on('click', '[id^="nextRoundButton"]', function() {
+           resetTimer();
+         });
+
+         $(document).ready(function() {
+            updateTimer(timeLeft);
+         });
     </script>
 </head>
+<link rel="stylesheet" type="text/css" href="/resources/timer.css" />
 <link href="https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
   <body>
       <div class="container mt-3">
