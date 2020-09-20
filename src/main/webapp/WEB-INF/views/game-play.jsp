@@ -87,11 +87,11 @@
               </div>
         </div>
 
-        <form:form action="/start-turn" method="POST" onsubmit="startTimer()">
+        <form:form action="/start-turn" method="POST">
             <input type="hidden" name="gameUUID" value="${gamePlayViewForm.gameUUID}" />
 
             <c:if test="${gamePlayViewForm.newTurn}">
-                <input id="startTurnButton" class="btn btn-lg btn-outline-primary m-3" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Start turn" />
+                <input id="startTurnButton" onclick="startTimer()" class="btn btn-lg btn-outline-primary m-3" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Start turn" />
             </c:if>
 
         </form:form>
@@ -132,10 +132,10 @@
           <form action="/next-player" method="post" onsubmit="resetTimer()">
             <input type="hidden" name="gameUUID" value="${gamePlayViewForm.gameUUID}" />
             <c:if test="${!gamePlayViewForm.newTurn}" >
-              <input id="nextPlayerButton" class="btn btn-lg btn-outline-secondary m-3" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Next Player" />
+              <input id="nextPlayerButton" onclick="startTimer()" class="btn btn-lg btn-outline-secondary m-3" type="submit" ${empty gamePlayViewForm.activeWords ? 'disabled="disabled"' : ''} value="Next Player" />
             </c:if>
           </form>
-          <form action="/next-round" method="post" onsubmit="resetTimer()">
+          <form action="/next-round" method="post">
             <input type="hidden" name="gameUUID" value="${gamePlayViewForm.gameUUID}" />
             <c:if test="${empty gamePlayViewForm.activeWords}" >
                 <input id="nextRoundButton" class="btn btn-lg btn-outline-secondary m-3" type="submit" value="Next Round" />
