@@ -41,7 +41,6 @@
                         input(message: "Should we deploy app to AWS?")
                     }
                     echo '***** Deploying app to K8S cluster on AWS*****'
-                    sh 'kubectl create -f k8s-manifest.yaml'
                     sh 'kubectl apply -f k8s-manifest.yaml'
                 }
                 post {
