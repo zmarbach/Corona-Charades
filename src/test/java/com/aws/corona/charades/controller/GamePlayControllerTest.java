@@ -76,7 +76,7 @@ class GamePlayControllerTest {
     @Test
     void startTurn() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post(START_TURN_URL).param("gameUUID", HARDCODED_UUID.toString()))
-                .andExpect(status().is(302))
+                .andExpect(status().is(200))
                 .andExpect(view().name(GAMEPLAY_REDIRECT_URL));
 
         verify(gamePlayService, times(1)).handleStartTurn(any(Game.class));
@@ -85,7 +85,7 @@ class GamePlayControllerTest {
     @Test
     void handleCorrectGuess() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post(CORRECT_URL).param("gameUUID", HARDCODED_UUID.toString()))
-                .andExpect(status().is(302))
+                .andExpect(status().is(200))
                 .andExpect(view().name(GAMEPLAY_REDIRECT_URL));
 
         verify(gamePlayService, times(1)).handleCorrect(any(Game.class));
@@ -94,7 +94,7 @@ class GamePlayControllerTest {
     @Test
     void handleSkip() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post(SKIP_URL).param("gameUUID", HARDCODED_UUID.toString()))
-                .andExpect(status().is(302))
+                .andExpect(status().is(200))
                 .andExpect(view().name(GAMEPLAY_REDIRECT_URL));
 
         verify(gamePlayService, times(1)).handleSkip(any(Game.class));
@@ -103,7 +103,7 @@ class GamePlayControllerTest {
     @Test
     void nextPlayer() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post(NEXT_PLAYER_URL).param("gameUUID", HARDCODED_UUID.toString()))
-                .andExpect(status().is(302))
+                .andExpect(status().is(200))
                 .andExpect(view().name(GAMEPLAY_REDIRECT_URL));
 
         verify(gamePlayService, times(1)).handleNextPlayer(any(Game.class));
@@ -112,7 +112,7 @@ class GamePlayControllerTest {
     @Test
     void nextRound() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post(NEXT_ROUND_URL).param("gameUUID", HARDCODED_UUID.toString()))
-                .andExpect(status().is(302))
+                .andExpect(status().is(200))
                 .andExpect(view().name(GAMEPLAY_REDIRECT_URL));
 
         verify(gamePlayService, times(1)).handleNextRound(any(Game.class));
