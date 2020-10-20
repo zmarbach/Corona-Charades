@@ -3,6 +3,7 @@ package com.aws.corona.charades.controller;
 import com.aws.corona.charades.domain.*;
 import com.aws.corona.charades.service.GameService;
 import com.aws.corona.charades.service.GameSetUpService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 public class GameSetUpController {
@@ -28,17 +30,20 @@ public class GameSetUpController {
     }
 
     @GetMapping(value = "/home")
+    @ResponseStatus(HttpStatus.OK)
     public String displayHomePage(){
       return "home";
     }
 
     @PostMapping(value = "/home")
+    @ResponseStatus(HttpStatus.OK)
     public String createNewGame(){
         Game game = gameService.createNewGame();
         return "redirect:/" + game.getUuid() + "/teams";
     }
 
     @GetMapping(value = "/{gameUUID}/teams")
+    @ResponseStatus(HttpStatus.OK)
     public String displayTeamsForm(Model model, @PathVariable UUID gameUUID) {
         CategoryMap categoryMap = new CategoryMap(new HashMap<>());
         List<String> categoryNames = new ArrayList<>(categoryMap.getCategoryFilePathMap().keySet());
@@ -48,6 +53,7 @@ public class GameSetUpController {
     }
 
     @PostMapping("/teams")
+    @ResponseStatus(HttpStatus.OK)
     public String teamsRedirect(@ModelAttribute("teamsViewForm") TeamsViewForm teamsViewForm){
         Game game = gameService.findGameById(teamsViewForm.getGameUUID());
         gameSetUpService.setUpGame(teamsViewForm, game);
@@ -55,6 +61,7 @@ public class GameSetUpController {
     }
 
     @GetMapping("/{gameUUID}/player-names-team-one")
+    @ResponseStatus(HttpStatus.OK)
     public String displayPlayerNamesForTeamOne(Model model, @PathVariable UUID gameUUID){
         Game game = gameService.findGameById(gameUUID);
         PlayerForm playerForm = new PlayerForm(game.getTeamOne().getPlayers(), gameUUID);
@@ -63,6 +70,7 @@ public class GameSetUpController {
     }
 
     @PostMapping("/player-names-team-one")
+    @ResponseStatus(HttpStatus.OK)
     public String updateTeamOnePlayerNames(@ModelAttribute("playerForm") PlayerForm playerForm){
         Game game = gameService.findGameById(playerForm.getGameUUID());
         List<Player> players = playerForm.getPlayers();
@@ -73,6 +81,7 @@ public class GameSetUpController {
     }
 
     @GetMapping("/{gameUUID}/player-names-team-two")
+    @ResponseStatus(HttpStatus.OK)
     public String displayPlayerNamesForTeamTwo(Model model, @PathVariable UUID gameUUID){
         Game game = gameService.findGameById(gameUUID);
         PlayerForm playerForm = new PlayerForm(game.getTeamTwo().getPlayers(), gameUUID);
@@ -81,6 +90,7 @@ public class GameSetUpController {
     }
 
     @PostMapping("/player-names-team-two")
+    @ResponseStatus(HttpStatus.OK)
     public String updateTeamTwoPlayerNames(@ModelAttribute("playerForm") PlayerForm playerForm){
         Game game = gameService.findGameById(playerForm.getGameUUID());
         List<Player> players = playerForm.getPlayers();
